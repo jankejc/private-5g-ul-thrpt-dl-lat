@@ -57,7 +57,7 @@ PING_INTERVAL = 0.2
 DEFAULT_PACKET_SIZE = 0
 SAVE_PCAP = True
 MAX_WAIT_TIME = 600  # 10 minutes max wait for UE connection
-ATTENUATION_VALUES = [10, 20, 30]  # Modify as needed
+ATTENUATION_VALUES = [15, 20, 25]  # Modify as needed
 CONFIG_FILES = [
     "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1.cfg",
     "pb-178-tdd-low-latency.cfg"
