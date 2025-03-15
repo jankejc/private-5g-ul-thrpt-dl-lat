@@ -9,9 +9,10 @@ from utils import print_info, print_success, print_error
 
 
 class LinuxHost(Host):
-    def __init__(self, log_dir: str, **kwargs):
+    def __init__(self, log_dir: str, min_ping_interval: Optional[float], **kwargs):
         super().__init__(**kwargs)
         self.log_dir = log_dir
+        self.min_ping_interval = min_ping_interval
         self.ssh_client: Optional[paramiko.SSHClient] = None
 
 
