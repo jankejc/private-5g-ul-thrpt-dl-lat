@@ -149,21 +149,21 @@ def main():
 
 
     for config in CONFIG_FILES:
-        # print_info(f"Setting configuration: {config}")
-        # if not amarisoft.set_configuration(config):
-        #     print_error(f"Failed to set {config}. Skipping...")
-        #     continue
-        #
-        # for attn in ATTENUATION_VALUES:
-        #     print_info(f"Setting attenuation to {attn} dB")
-        #     if not attenuator.set_all_attenuations(attn):
-        #         print_error(f"Failed to set attenuation {attn} dB. Skipping...")
-        #         continue
-        #
-        #     print_info("Restarting Amarisoft after setting attenuation...")
-        #     if not amarisoft.restart_service():
-        #         print_error("Failed to restart Amarisoft after attenuation change.")
-        #         continue
+        print_info(f"Setting configuration: {config}")
+        if not amarisoft.set_configuration(config):
+            print_error(f"Failed to set {config}. Skipping...")
+            continue
+
+        for attn in ATTENUATION_VALUES:
+            print_info(f"Setting attenuation to {attn} dB")
+            if not attenuator.set_all_attenuations(attn):
+                print_error(f"Failed to set attenuation {attn} dB. Skipping...")
+                continue
+
+            print_info("Restarting Amarisoft after setting attenuation...")
+            if not amarisoft.restart_service():
+                print_error("Failed to restart Amarisoft after attenuation change.")
+                continue
 
             if not wait_for_ue_connection(lenovo,
                                           rpi,
@@ -172,21 +172,21 @@ def main():
                 print_error("UE did not connect. Stopping.")
                 return
 
-            # print_info("Waiting for stable connection...")
-            # time.sleep(5)
-        #
-        #     # todo: adjust
-        #     print(amarisoft.get_stats(ntp_server))
-        #
-        #     if not lenovo.run_vxlan_ping_test(lidar,
-        #                                       PING_DURATION,
-        #                                       PING_INTERVAL,
-        #                                       ntp_server,
-        #                                       DEFAULT_PACKET_SIZE,
-        #                                       SAVE_PCAP,
-        #                                       ):
-        #         print_error("Ping test failed after attenuation change.")
-        #         continue
+            print_info("Waiting for stable connection...")
+            time.sleep(5)
+
+            # todo: adjust
+            print(amarisoft.get_stats(ntp_server))
+
+            if not lenovo.run_vxlan_ping_test(lidar,
+                                              PING_DURATION,
+                                              PING_INTERVAL,
+                                              ntp_server,
+                                              DEFAULT_PACKET_SIZE,
+                                              SAVE_PCAP,
+                                              ):
+                print_error("Ping test failed after attenuation change.")
+                continue
 
     amarisoft.disconnect()
     lenovo.disconnect()
