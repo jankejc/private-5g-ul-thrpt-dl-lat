@@ -16,7 +16,7 @@ AMARISOFT = {
     "username": "root",
     "password": "toor",
     "management_ip": "10.29.4.193",
-    "log_dir": "/root/websockets",
+    "log_dir": "/root/websockets/run_stats",
     "five_g_ip": "192.168.2.1",
     "config_dir": "/root/enb/config",
     "service_name": "lte",
