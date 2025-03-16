@@ -8,8 +8,9 @@ from hosts.vxlan_linux_host import VxlanHost, VxlanLinuxHost
 
 class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
     """I want only service receiver (Lenovo) to run tests."""
-    def __init__(self, **kwargs):
+    def __init__(self, vxlan_if: str, **kwargs):
         super().__init__(**kwargs)
+        self.vxlan_if = vxlan_if
 
     def run_vxlan_ping_test(self,
                             dest_host: VxlanHost,
@@ -42,7 +43,7 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
 
             # Start capturing all traffic with tcpdump if enabled
             if save_pcap:
-                tcpdump_command = f"tcpdump -i any -w {pcap_file} &"
+                tcpdump_command = f"sudo tcpdump -ni {self.vxlan_if} -w {pcap_file} > /dev/null 2>&1 &"
                 self.execute_command(tcpdump_command)
 
             if packet_size > 0:
@@ -54,7 +55,7 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
 
             # Stop tcpdump after ping test if enabled
             if save_pcap:
-                self.execute_command("pkill -f 'tcpdump -i any'")
+                self.execute_command(f"sudo pkill -f 'tcpdump -ni {self.vxlan_if}'")
 
             if exit_status == 0:
                 msg = f"Ping Packet Size {packet_size} completed successfully."
