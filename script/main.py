@@ -140,6 +140,7 @@ def main():
         vxlan_ip=LENOVO["vxlan_ip"],
         public_ip=LENOVO["public_ip"],
         min_ping_interval=LENOVO["min_ping_interval"],
+        vxlan_if=LENOVO["vxlan_if"],
     )
     if not lenovo.connect():
         print_error("Failed to connect to Lenovo / Husarion.")
@@ -159,6 +160,8 @@ def main():
 
     dynamic_root_dir_filename = get_time()
 
+    # todo: change to lidar when it will finally work
+    tested_node: VxlanHost = rpi
 
     for config in CONFIG_FILES:
         print_info(f"Setting configuration: {config}")
@@ -195,8 +198,7 @@ def main():
 
             if not lenovo.run_vxlan_ping_test(lidar,
                                               PING_DURATION,
-                                              PING_INTERVAL,
-                                              ntp_server,
+                                              filename,
                                               lenovo_dynamic_log_dir,
                                               DEFAULT_PACKET_SIZE,
                                               SAVE_PCAP,
