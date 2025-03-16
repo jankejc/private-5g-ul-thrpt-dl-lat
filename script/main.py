@@ -77,7 +77,10 @@ CONFIG_FILES = [
 ]
 
 
-def wait_for_ue_connection(pinging_host, pinged_host, ping_count):
+def wait_for_ue_connection(pinging_host: ServiceRecvVxlanLinuxHost,
+                           pinged_host: VxlanHost,
+                           ping_count: int,
+                           ):
     print_info("Waiting for UE to connect...")
     start_time = time.time()
     while time.time() - start_time < MAX_WAIT_TIME:
