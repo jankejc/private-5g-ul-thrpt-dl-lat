@@ -68,7 +68,7 @@ RPI = {
 
 PING_COUNT_CONNECTION_CHECK = 10
 PING_DURATION = 60  # seconds
-DEFAULT_PACKET_SIZE = 0
+DEFAULT_LINUX_PING_PAYLOAD = 56
 SAVE_PCAP = True
 MAX_WAIT_TIME = 600  # 10 minutes max wait for UE connection
 ATTENUATION_VALUES = [15, 20, 25]  # Modify as needed
@@ -202,7 +202,7 @@ def main():
                                               PING_DURATION,
                                               filename,
                                               lenovo_dynamic_log_dir,
-                                              DEFAULT_PACKET_SIZE,
+                                              DEFAULT_LINUX_PING_PAYLOAD,
                                               SAVE_PCAP
                                               ):
                 print_error("Ping test failed after attenuation change.")
