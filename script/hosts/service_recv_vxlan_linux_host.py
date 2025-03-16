@@ -33,7 +33,7 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
             print_info(
                 f"Running Ping on {self.vxlan_ip} / {self.management_ip} "
                 f"to {dest_host.vxlan_ip} / {dest_host.management_ip} with packet size {packet_size}, "
-                f"count {ping_count}, interval {ping_interval}s...")
+                f"count {ping_count}, interval {self.min_ping_interval}s...")
 
             # Running ping for 10 seconds before proper test to eliminate unstable pings at the beginning.
             pre_ping_command = f"ping -c 10 {dest_host.vxlan_ip}"
@@ -45,9 +45,9 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
                 self.execute_command(tcpdump_command)
 
             if packet_size > 0:
-                command = f"ping -s {packet_size} -c {ping_count} -i {ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
+                command = f"ping -s {packet_size} -c {ping_count} -i {self.min_ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
             else:
-                command = f"ping -c {ping_count} -i {ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
+                command = f"ping -c {ping_count} -i {self.min_ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
 
             _, stderr, exit_status = self.execute_command(command)
 
