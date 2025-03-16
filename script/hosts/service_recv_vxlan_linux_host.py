@@ -14,10 +14,10 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
     def run_vxlan_ping_test(self,
                             dest_host: VxlanHost,
                             ping_count: int,
-                            ping_interval: float,
-                            ntp: NtpIpNode,
+                            filename: str,
+                            dynamic_log_dir: str,
                             packet_size: int = 0,
-                            save_pcap: bool = True
+                            save_pcap: bool = True,
                             ) -> bool:
         """If packet size = 0 it will be default from ping."""
 
