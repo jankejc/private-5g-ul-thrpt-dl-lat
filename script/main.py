@@ -184,7 +184,7 @@ def main():
                 continue
 
             if not wait_for_ue_connection(lenovo,
-                                          rpi,
+                                          tested_node,
                                           PING_COUNT_CONNECTION_CHECK,
                                           ):
                 print_error("UE did not connect. Stopping.")
@@ -197,11 +197,12 @@ def main():
             print(amarisoft.get_stats(ntp_server))
 
             if not lenovo.run_vxlan_ping_test(lidar,
+            if not lenovo.run_vxlan_ping_test(tested_node,
                                               PING_DURATION,
                                               filename,
                                               lenovo_dynamic_log_dir,
                                               DEFAULT_PACKET_SIZE,
-                                              SAVE_PCAP,
+                                              SAVE_PCAP
                                               ):
                 print_error("Ping test failed after attenuation change.")
                 continue
