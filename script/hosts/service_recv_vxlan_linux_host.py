@@ -27,8 +27,8 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
             self.setup_log_directory(f"{dynamic_log_dir}/{packet_size}/pcap")
 
         try:
-            ping_log = f"{self.log_dir}/{packet_size}/ping_logs/{filename}.log"
-            pcap_file = f"{self.log_dir}/{packet_size}/pcap/{filename}.pcap" if save_pcap else None
+            ping_log = f"{dynamic_log_dir}/{packet_size}/ping_logs/{filename}.log"
+            pcap_file = f"{dynamic_log_dir}/{packet_size}/pcap/{filename}.pcap" if save_pcap else None
 
             print_info(
                 f"Running Ping on {self.vxlan_ip} / {self.management_ip} "
