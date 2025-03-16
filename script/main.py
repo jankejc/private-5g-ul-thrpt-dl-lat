@@ -193,10 +193,10 @@ def main():
             print_info("Waiting for stable connection...")
             time.sleep(5)
 
-            # todo: adjust
-            print(amarisoft.get_stats(ntp_server))
+            filename = ntp_server.get_ntp_time()
 
-            if not lenovo.run_vxlan_ping_test(lidar,
+            amarisoft.save_stats(filename, amarisoft_dynamic_log_dir)
+
             if not lenovo.run_vxlan_ping_test(tested_node,
                                               PING_DURATION,
                                               filename,
