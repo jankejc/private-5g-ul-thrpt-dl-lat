@@ -22,11 +22,9 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
                             ) -> bool:
         """If packet size = 0 it will be default from ping."""
 
-        self.setup_log_subdirectory(self.log_dir, f"{packet_size}/ping_logs")
+        self.setup_log_directory(f"{dynamic_log_dir}/{packet_size}/ping_logs")
         if save_pcap:
-            self.setup_log_subdirectory(self.log_dir, f"{packet_size}/pcap")
-
-        filename = ntp.get_ntp_time()
+            self.setup_log_directory(f"{dynamic_log_dir}/{packet_size}/pcap")
 
         try:
             ping_log = f"{self.log_dir}/{packet_size}/ping_logs/{filename}.log"
