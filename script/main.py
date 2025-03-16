@@ -1,3 +1,4 @@
+import datetime
 import logging
 import time
 
@@ -94,6 +95,11 @@ def wait_for_ue_connection(pinging_host: ServiceRecvVxlanLinuxHost,
     return False
 
 
+def get_time() -> str:
+    now = datetime.datetime.now()
+    return now.strftime("%Y%m%d-%H%M%S")
+
+
 def main():
     attenuator = AttenuatorHost(
         username=ATTENUATOR["username"],
@@ -151,6 +157,8 @@ def main():
         min_ping_interval=RPI["min_ping_interval"],
     )
 
+    dynamic_root_dir_filename = get_time()
+
 
     for config in CONFIG_FILES:
         print_info(f"Setting configuration: {config}")
@@ -159,6 +167,9 @@ def main():
             continue
 
         for attn in ATTENUATION_VALUES:
+            amarisoft_dynamic_log_dir = f"{amarisoft.log_dir}/{dynamic_root_dir_filename}/{config}/{attn}"
+            lenovo_dynamic_log_dir = f"{lenovo.log_dir}/{dynamic_root_dir_filename}/{config}/{attn}"
+
             print_info(f"Setting attenuation to {attn} dB")
             if not attenuator.set_all_attenuations(attn):
                 print_error(f"Failed to set attenuation {attn} dB. Skipping...")
@@ -186,6 +197,7 @@ def main():
                                               PING_DURATION,
                                               PING_INTERVAL,
                                               ntp_server,
+                                              lenovo_dynamic_log_dir,
                                               DEFAULT_PACKET_SIZE,
                                               SAVE_PCAP,
                                               ):
