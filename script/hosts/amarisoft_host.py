@@ -3,7 +3,6 @@ import websocket
 
 from typing import Optional
 from hosts.linux_five_g_core_host import LinuxFiveGCoreHost
-from hosts.ntp_ip_node import NtpIpNode
 from utils import print_info
 
 

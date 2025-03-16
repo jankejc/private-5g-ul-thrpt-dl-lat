@@ -178,6 +178,7 @@ def main():
                 print_error(f"Failed to set attenuation {attn} dB. Skipping...")
                 continue
 
+
             print_info("Restarting Amarisoft after setting attenuation...")
             if not amarisoft.restart_service():
                 print_error("Failed to restart Amarisoft after attenuation change.")

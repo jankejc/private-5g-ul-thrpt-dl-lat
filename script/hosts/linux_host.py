@@ -44,34 +44,18 @@ class LinuxHost(Host):
         return stdout.read().decode(), stderr.read().decode(), exit_status
 
 
-    def setup_log_directory(self) -> bool:
+    def setup_log_directory(self, directory_path: str) -> bool:
         try:
-            command = f"rm -rf {self.log_dir_ping} && mkdir -p {self.log_dir_ping}"
+            command = f"mkdir -p {directory_path}"
             _, stderr, exit_status = self.execute_command(command)
             if exit_status == 0:
-                print_info(f"Log directory for ping ensured: {self.log_dir_ping}")
-                return True
+                print_info(f"Log directory ensured: {directory_path}")
             else:
-                print_error(f"Error creating log directory {self.log_dir_ping}: {stderr}")
+                print_error(f"Error creating log directory {directory_path}: {stderr}")
                 return False
 
         except Exception as e:
-            print_error(f"Exception while creating log directory {self.log_dir_iperf} or {self.log_dir_ping}: {e}")
-            return False
-
-
-    def setup_log_subdirectory(self, directory_path: str, subdirectory_name: str) -> bool:
-        try:
-            command = f"mkdir -p {directory_path}/{subdirectory_name}"
-            _, stderr, exit_status = self.execute_command(command)
-            if exit_status == 0:
-                print_info(f"Log subdirectory ensured: {directory_path}/{subdirectory_name}")
-            else:
-                print_error(f"Error creating log subdirectory {directory_path}/{subdirectory_name}: {stderr}")
-                return False
-
-        except Exception as e:
-            print_error(f"Exception while creating log subdirectory {directory_path + subdirectory_name}: {e}")
+            print_error(f"Exception while creating log directory {directory_path}: {e}")
             return False
         
 
