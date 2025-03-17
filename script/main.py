@@ -142,6 +142,7 @@ def main():
         public_ip=LENOVO["public_ip"],
         min_ping_interval=LENOVO["min_ping_interval"],
         vxlan_if=LENOVO["vxlan_if"],
+        receiver_name=LENOVO["name"],
     )
     if not lenovo.connect():
         print_error("Failed to connect to Lenovo / Husarion.")
