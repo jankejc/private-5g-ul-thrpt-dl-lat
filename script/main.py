@@ -34,7 +34,8 @@ LENOVO = {
     "vxlan_ip": "10.15.20.238",
     "public_ip": None,
     "min_ping_interval": 1,
-    "vxlan_if": "enp92s0"
+    "vxlan_if": "enp92s0",
+    "name": "LENOVO",
 }
 
 ATTENUATOR = {
