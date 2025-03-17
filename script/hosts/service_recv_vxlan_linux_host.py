@@ -43,8 +43,8 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
                 tcpdump_command = f"sudo tcpdump -ni {self.vxlan_if} -w {pcap_file} > /dev/null 2>&1 &"
                 self.execute_command(tcpdump_command)
 
-            if packet_size > 0:
-                command = f"ping -s {packet_size} -c {ping_count} -i {self.min_ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
+            if ping_size > 0:
+                command = f"ping -s {ping_size} -c {ping_count} -i {self.min_ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
             else:
                 command = f"ping -c {ping_count} -i {self.min_ping_interval} {dest_host.vxlan_ip} > {ping_log} 2>&1"
 
@@ -57,7 +57,7 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
             if exit_status == 0:
                 msg = f"[{self.receiver_name}] Ping Packet Size {ping_size} completed successfully."
                 if save_pcap:
-                    msg += f" Pcap saved as {pcap_file}."
+                    msg += f" PCAP saved as {pcap_file}."
                 print_success(msg)
                 return True
             else:
