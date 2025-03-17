@@ -14,11 +14,11 @@ class AmarisoftHost(LinuxFiveGCoreHost):
         super().__init__(**kwargs)
         self.remote_api_port = remote_api_port
 
-    # todo: add ntp stamping
-    def save_stats(self, filename: str, amarisoft_dynamic_log_dir: str):
-        print_info(f"Connecting via WebSocket at {self.management_ip}:{self.remote_api_port}")
+
+    def save_trace(self, filename: str, amarisoft_dynamic_log_dir: str):
+        print_info(f"[AMARISOFT] Using Remote API via WebSocket at 127.0.0.1:{self.remote_api_port}")
         ws = websocket.create_connection(f"ws://{self.management_ip}:{self.remote_api_port}", origin="Test")
-        ws.send('{"message":"stats"}'.encode('utf-8'))
+        ws.send('{"message":"ue_get", "stats":true}'.encode('utf-8'))
 
         result = ""
         while True:
@@ -31,6 +31,5 @@ class AmarisoftHost(LinuxFiveGCoreHost):
 
         ws.close()
 
-        self.execute_command(f"{response} > {amarisoft_dynamic_log_dir}/{filename}")
-
+        self.execute_command(f"mkdir -p {amarisoft_dynamic_log_dir} && echo \"{result}\" > {amarisoft_dynamic_log_dir}/{filename} 2>&1")
 
