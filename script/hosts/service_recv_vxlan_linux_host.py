@@ -14,12 +14,13 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
     def run_vxlan_ping_test(self,
                             dest_host: VxlanHost,
                             ping_count: int,
-                            filename: str,
                             dynamic_log_dir: str,
                             ping_size: int = 0,
                             save_pcap: bool = True,
                             ) -> bool:
         """If packet size = 0 it will be default from ping."""
+
+        filename = time.strftime("%Y%m%d-%H%M%S", time.localtime())
 
         self.setup_log_directory(f"{dynamic_log_dir}/{ping_size}/ping_logs")
         if save_pcap:

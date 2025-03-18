@@ -1,5 +1,6 @@
 import datetime
 import logging
+import threading
 import time
 
 from hosts.amarisoft_host import AmarisoftHost
@@ -67,6 +68,7 @@ RPI = {
     "min_ping_interval": 0.2,
 }
 
+GET_TRACE_INTERVAL = 0.4 # By looking at created files Amari respond in about 400ms
 PING_COUNT_CONNECTION_CHECK = 10
 PING_DURATION = 60  # seconds
 DEFAULT_LINUX_PING_PAYLOAD = 56
@@ -99,6 +101,35 @@ def wait_for_ue_connection(pinging_host: ServiceRecvVxlanLinuxHost,
 def get_time() -> str:
     now = datetime.datetime.now()
     return now.strftime("%Y%m%d-%H%M%S")
+
+
+def save_traces(amarisoft: AmarisoftHost, interval: float, dynamic_log_dir: str, stop_event: threading.Event):
+    """
+    Calls amarisoft.save_trace every 100ms until stop_event is set.
+    """
+    while not stop_event.is_set():
+        amarisoft.save_trace(dynamic_log_dir)
+        time.sleep(interval)
+
+
+def start_saving_trace(amarisoft: AmarisoftHost, interval: float, dynamic_log_dir: str) -> (threading.Event, threading.Event):
+    # Create an event to signal when the ping test is done.
+    stop_event = threading.Event()
+
+    # Start the trace saver thread.
+    trace_thread = threading.Thread(
+        target=save_traces,
+        args=(amarisoft, interval, dynamic_log_dir, stop_event)
+    )
+    trace_thread.start()
+
+    return stop_event, trace_thread
+
+
+def stop_saving_trace(stop_event: threading.Event, trace_thread: threading.Thread):
+    # When the ping test finishes, signal the trace saver thread to stop.
+    stop_event.set()
+    trace_thread.join()
 
 
 def main():
@@ -200,23 +231,20 @@ def main():
             print_info("Waiting for stable connection...")
             time.sleep(5)
 
-            filename = ntp_server.get_ntp_time()
+            print_info(f"Starting getting trace each {GET_TRACE_INTERVAL}s...")
+            stop_event, trace_thread = start_saving_trace(amarisoft, GET_TRACE_INTERVAL, amarisoft_dynamic_log_dir)
 
             amarisoft.save_stats(filename, amarisoft_dynamic_log_dir)
+            #                                   filename,
 
-            if not lenovo.run_vxlan_ping_test(tested_node,
-                                              PING_DURATION,
-                                              filename,
-                                              lenovo_dynamic_log_dir,
-                                              DEFAULT_LINUX_PING_PAYLOAD,
-                                              SAVE_PCAP
-                                              ):
-                print_error("Ping test failed after attenuation change.")
-                continue
+            print_info(f"Stopping getting trace")
+            stop_saving_trace(stop_event, trace_thread)
+
     print_info(f"Reverse synchronisation on Amarisoft and Lenovo")
     lenovo.ntp_off(prev_ntp_lenovo)
     amarisoft.ntp_off(prev_ntp_amari)
 
+    print_info(f"Disconnecting from Amarisoft and Lenovo")
     amarisoft.disconnect()
     lenovo.disconnect()
     print_success("Test sequence completed successfully.")
