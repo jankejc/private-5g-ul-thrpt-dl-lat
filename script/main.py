@@ -162,6 +162,10 @@ def main():
 
     dynamic_root_dir_filename = get_time()
 
+    print_info(f"Synchronizing Amarisoft and Lenovo")
+    prev_ntp_lenovo = lenovo.ntp_on(ntp_server)
+    prev_ntp_amari = amarisoft.ntp_on(ntp_server)
+
     # todo: change to lidar when it will finally work
     tested_node: VxlanHost = rpi
 
@@ -209,6 +213,9 @@ def main():
                                               ):
                 print_error("Ping test failed after attenuation change.")
                 continue
+    print_info(f"Reverse synchronisation on Amarisoft and Lenovo")
+    lenovo.ntp_off(prev_ntp_lenovo)
+    amarisoft.ntp_off(prev_ntp_amari)
 
     amarisoft.disconnect()
     lenovo.disconnect()

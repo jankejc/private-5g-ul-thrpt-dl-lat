@@ -7,6 +7,8 @@ import paramiko
 from hosts.host import Host
 from utils import print_info, print_success, print_error
 
+from script.hosts.ntp_ip_node import NtpIpNode
+
 
 class LinuxHost(Host):
     def __init__(self, log_dir: str, min_ping_interval: Optional[float], **kwargs):
@@ -94,4 +96,75 @@ class LinuxHost(Host):
         except Exception as e:
             print_error(f"Error downloading all logs from {self.management_ip}: {e}")
             return False
+
+    def ntp_on(self, ntp_server: NtpIpNode) -> Optional[str]:
+        """
+        Sets the NTP server to ntp_server.public_ip.
+
+        - If an active NTP line exists with a different IP, replace it and return that IP.
+        - If an active NTP line already equals ntp_server.public_ip, do nothing.
+        - If only a commented NTP line exists, replace it with an active line and return None.
+        """
+        """
+        If you "sudo timedatectl set-ntp false" then "systemctl status systemd-timesyncd" will be disabled.
+        Then if you "sudo timedatectl set-ntp true" then "systemctl status systemd-timesyncd" will be enabled.
+        Finally if you "systemctl restart systemd-timesyncd" after "sudo timedatectl set-ntp false" it will also enable the service.
+        It's connected to each other.
+        """
+
+        # Get the current NTP line (either active or commented).
+        get_ntp_cmd = "sudo grep -E '^[#]?NTP=' /etc/systemd/timesyncd.conf"
+        result = self.execute_command(get_ntp_cmd)[0].strip()
+
+        if not result:
+            # If no NTP line exists, insert it at the top.
+            insert_cmd = f"sudo sed -i '1s/^/NTP={ntp_server.public_ip}\\n/' /etc/systemd/timesyncd.conf"
+            self.execute_command(insert_cmd)
+            self.execute_command("sudo systemctl restart systemd-timesyncd")
+            return None
+
+        current_line = result.strip()
+        # Remove any leading '#' and extra whitespace.
+        line_no_comment = current_line.lstrip('#').strip()
+        if not line_no_comment.startswith("NTP="):
+            # Fallback: replace the entire line with our setting.
+            new_line = f"NTP={ntp_server.public_ip}"
+            replace_cmd = f"sudo sed -i 's/.*/{new_line}/' /etc/systemd/timesyncd.conf"
+            self.execute_command(replace_cmd)
+            self.execute_command("sudo systemctl restart systemd-timesyncd")
+            return None
+
+        # Extract the current IP value.
+        current_ip = line_no_comment.split("=", 1)[1].strip()
+        if current_ip == ntp_server.public_ip:
+            return None
+        else:
+            new_line = f"NTP={ntp_server.public_ip}"
+            # Replace any line starting with (optional '#') NTP= with our new setting.
+            replace_cmd = f"sudo sed -i 's/^[#]*NTP=.*/{new_line}/' /etc/systemd/timesyncd.conf"
+            self.execute_command(replace_cmd)
+            self.execute_command("sudo systemctl restart systemd-timesyncd")
+            # If the original line was active (not commented), return the previous IP; if it was commented, return None.
+            return current_ip if current_line.startswith("NTP=") else None
+
+
+    def ntp_off(self, prev_ntp_ip: str):
+        """
+        Restores the previous NTP server if provided.
+        If no previous NTP was set, simply comments out the current one.
+        """
+        if prev_ntp_ip:
+            restore_ntp_cmd = f"sudo sed -i 's|^NTP=.*|NTP={prev_ntp_ip}|' /etc/systemd/timesyncd.conf"
+            self.execute_command(restore_ntp_cmd)
+        else:
+            # Comment out current NTP setting if no previous NTP
+            comment_out_ntp_cmd = "sudo sed -i 's/^NTP=/#NTP=/' /etc/systemd/timesyncd.conf"
+            self.execute_command(comment_out_ntp_cmd)
+
+        # Restart systemd-timesyncd
+        restart_ntp_cmd = "sudo systemctl restart systemd-timesyncd"
+        self.execute_command(restart_ntp_cmd)
+
+
+
         
