@@ -162,7 +162,7 @@ class LinuxHost(Host):
             self.execute_command(comment_out_ntp_cmd)
 
         # Restart systemd-timesyncd
-        restart_ntp_cmd = "sudo systemctl restart systemd-timesyncd"
+        restart_ntp_cmd = "sudo systemctl stop systemd-timesyncd"
         self.execute_command(restart_ntp_cmd)
 
 
