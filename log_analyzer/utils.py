@@ -1,5 +1,5 @@
 import os
-
+from colorama import Fore, Style
 
 def parse_folder_structure(directory):
     """
@@ -96,4 +96,9 @@ def organize_file_structure(results, base_station, test_name, logs, side, ping_p
 
 
 
+def print_success(message: str) -> None:
+    print(f"{Fore.GREEN}{message}{Style.RESET_ALL}")
 
+
+def print_error(message: str) -> None:
+    print(f"{Fore.RED}{message}{Style.RESET_ALL}")

@@ -1,11 +1,10 @@
-import math
 import os
 from matplotlib import pyplot as plt
 
 
 from pathlib import Path
 
-from scripts.log_analyzer.consts import BOXPLOT_FOLDER_NAME
+from log_analyzer.consts import BOXPLOT_FOLDER_NAME
 from scripts.utils import print_error, print_success
 
 
