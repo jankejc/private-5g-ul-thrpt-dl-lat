@@ -40,12 +40,12 @@ def parse_folder_structure(directory):
     return traverse(directory, seen_folders)
 
 
-def organize_file_structure(results, base_station, test_name, logs, side, ping_packet_sizes, types_of_logs):
+def organize_file_structure(results, base_station, test_name, logs, side, ping_packet_sizes, types_of_logs, path_to_logs_results):
     """
     Organizes the parsed folder structure into a more organized format as required.
     """
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    results_dir = os.path.join(current_dir, '..', '..', results, base_station, test_name)  # Go two levels up and then to "results"
+    results_dir = os.path.join(current_dir, *path_to_logs_results)  # Go two levels up and then to "results"
 
     # Get the folder structure
     folder_structure = parse_folder_structure(results_dir)
