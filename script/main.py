@@ -74,10 +74,11 @@ PING_DURATION = 60  # seconds
 DEFAULT_LINUX_PING_PAYLOAD = 56
 SAVE_PCAP = True
 MAX_WAIT_TIME = 600  # 10 minutes max wait for UE connection
-ATTENUATION_VALUES = [15, 20, 25]  # Modify as needed
+ATTENUATION_VALUES = [5] # can dangerous for setup
 CONFIG_FILES = [
     "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1.cfg",
-    "pb-178-tdd-low-latency.cfg"
+    "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1-better.cfg",
+    # "pb-178-tdd-low-latency.cfg",
 ]
 
 
@@ -133,6 +134,27 @@ def stop_saving_trace(stop_event: threading.Event, trace_thread: threading.Threa
 
 
 def main():
+    # lenovo will host test
+    lenovo = ServiceRecvVxlanLinuxHost(
+        username=LENOVO["username"],
+        password=LENOVO["password"],
+        management_ip=LENOVO["management_ip"],
+        log_dir=LENOVO["log_dir"],
+        vxlan_ip=LENOVO["vxlan_ip"],
+        public_ip=LENOVO["public_ip"],
+        min_ping_interval=LENOVO["min_ping_interval"],
+        vxlan_if=LENOVO["vxlan_if"],
+        receiver_name=LENOVO["name"],
+    )
+    if not lenovo.connect():
+        print_error("Failed to connect to Lenovo / Husarion.")
+        return
+
+    dynamic_root_dir_filename = get_time()
+
+    # todo: check on lenovo - fixed dirs
+    # lenovo.setup_logging(dynamic_root_dir_filename)
+
     attenuator = AttenuatorHost(
         username=ATTENUATOR["username"],
         password=ATTENUATOR["password"],
@@ -164,21 +186,6 @@ def main():
         print_error("Failed to connect to Amarisoft.")
         return
 
-    lenovo = ServiceRecvVxlanLinuxHost(
-        username=LENOVO["username"],
-        password=LENOVO["password"],
-        management_ip=LENOVO["management_ip"],
-        log_dir=LENOVO["log_dir"],
-        vxlan_ip=LENOVO["vxlan_ip"],
-        public_ip=LENOVO["public_ip"],
-        min_ping_interval=LENOVO["min_ping_interval"],
-        vxlan_if=LENOVO["vxlan_if"],
-        receiver_name=LENOVO["name"],
-    )
-    if not lenovo.connect():
-        print_error("Failed to connect to Lenovo / Husarion.")
-        return
-
     ntp_server = NtpIpNode(public_ip=NTP["public_ip"])
 
     rpi = VxlanLinuxHost(
@@ -190,8 +197,6 @@ def main():
         public_ip=RPI["public_ip"],
         min_ping_interval=RPI["min_ping_interval"],
     )
-
-    dynamic_root_dir_filename = get_time()
 
     print_info(f"Synchronizing Amarisoft and Lenovo")
     prev_ntp_lenovo = lenovo.ntp_on(ntp_server)
@@ -206,7 +211,7 @@ def main():
             print_error(f"Failed to set {config}. Skipping...")
             continue
 
-        for attn in ATTENUATION_VALUES:
+        for attn in ATTENUATION_VALUES: 
             amarisoft_dynamic_log_dir = f"{amarisoft.log_dir}/{dynamic_root_dir_filename}/{config}/{attn}"
             lenovo_dynamic_log_dir = f"{lenovo.log_dir}/{dynamic_root_dir_filename}/{config}/{attn}"
 
@@ -216,26 +221,33 @@ def main():
                 continue
 
 
-            print_info("Restarting Amarisoft after setting attenuation...")
-            if not amarisoft.restart_service():
-                print_error("Failed to restart Amarisoft after attenuation change.")
-                continue
+            # print_info("Restarting Amarisoft after setting attenuation...")
+            # if not amarisoft.restart_service():
+            #     print_error("Failed to restart Amarisoft after attenuation change.")
+            #     continue
 
-            if not wait_for_ue_connection(lenovo,
-                                          tested_node,
-                                          PING_COUNT_CONNECTION_CHECK,
-                                          ):
-                print_error("UE did not connect. Stopping.")
-                return
+            # if not wait_for_ue_connection(lenovo,
+            #                               tested_node,
+            #                               PING_COUNT_CONNECTION_CHECK,
+            #                               ):
+            #     print_error("UE did not connect. Stopping.")
+            #     return
 
             print_info("Waiting for stable connection...")
-            time.sleep(5)
+            # time.sleep(5)
 
             print_info(f"Starting getting trace each {GET_TRACE_INTERVAL}s...")
             stop_event, trace_thread = start_saving_trace(amarisoft, GET_TRACE_INTERVAL, amarisoft_dynamic_log_dir)
 
-            amarisoft.save_stats(filename, amarisoft_dynamic_log_dir)
+            # if not lenovo.run_vxlan_ping_test(tested_node,
+            #                                   PING_DURATION,
             #                                   filename,
+            #                                   lenovo_dynamic_log_dir,
+            #                                   DEFAULT_LINUX_PING_PAYLOAD,
+            #                                   SAVE_PCAP
+            #                                   ):
+            #     print_error("Ping test failed after attenuation change.")
+            #     continue
 
             print_info(f"Stopping getting trace")
             stop_saving_trace(stop_event, trace_thread)
