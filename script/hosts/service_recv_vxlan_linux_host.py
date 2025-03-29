@@ -35,7 +35,7 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
                 f"to {dest_host.vxlan_ip} / {dest_host.management_ip} with packet size {ping_size}, "
                 f"count {ping_count}, interval {self.min_ping_interval}s...")
 
-            # Running ping for 10 seconds before proper test to eliminate unstable pings at the beginning.
+            # Running ping for 10 pings before proper test to eliminate unstable pings at the beginning.
             pre_ping_command = f"ping -c 10 {dest_host.vxlan_ip}"
             self.execute_command(pre_ping_command)
 
@@ -51,9 +51,11 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
 
             _, stderr, exit_status = self.execute_command(command)
 
+            time.sleep(15)
+
             # Stop tcpdump after ping test if enabled
             if save_pcap:
-                self.execute_command(f"sudo pkill -f 'tcpdump -ni {self.vxlan_if}'")
+                self.execute_command(f"sudo pkill -SIGINT -f 'tcpdump -ni {self.vxlan_if}'")
 
             if exit_status == 0:
                 msg = f"[{self.receiver_name}] Ping Packet Size {ping_size} completed successfully."
