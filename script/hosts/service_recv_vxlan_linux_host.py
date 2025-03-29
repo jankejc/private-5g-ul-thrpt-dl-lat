@@ -54,6 +54,7 @@ class ServiceRecvVxlanLinuxHost(VxlanLinuxHost):
             time.sleep(15)
 
             # Stop tcpdump after ping test if enabled
+            # TODO check
             if save_pcap:
                 self.execute_command(f"sudo pkill -SIGINT -f 'tcpdump -ni {self.vxlan_if}'")
 

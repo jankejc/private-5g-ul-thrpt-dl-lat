@@ -75,6 +75,7 @@ DEFAULT_LINUX_PING_PAYLOAD = 56
 SAVE_PCAP = True
 MAX_WAIT_TIME = 600  # 10 minutes max wait for UE connection
 ATTENUATION_VALUES = [5] # can dangerous for setup
+PACKET_SIZES = [16, 256, 512, 1024, 1436]
 CONFIG_FILES = [
     "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1.cfg",
     "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1-better.cfg",
@@ -236,21 +237,24 @@ def main():
             print_info("Waiting for stable connection...")
             # time.sleep(5)
 
-            print_info(f"Starting getting trace each {GET_TRACE_INTERVAL}s...")
-            stop_event, trace_thread = start_saving_trace(amarisoft, GET_TRACE_INTERVAL, amarisoft_dynamic_log_dir)
+            # TODO check packeting
+            for packet_size in PACKET_SIZES:
+                print_info(f"Checking packet size: {packet_size}B")
+                print_info(f"Starting getting trace each {GET_TRACE_INTERVAL}s...")
+                stop_event, trace_thread = start_saving_trace(amarisoft, GET_TRACE_INTERVAL, amarisoft_dynamic_log_dir)
 
-            # if not lenovo.run_vxlan_ping_test(tested_node,
-            #                                   PING_DURATION,
-            #                                   filename,
-            #                                   lenovo_dynamic_log_dir,
-            #                                   DEFAULT_LINUX_PING_PAYLOAD,
-            #                                   SAVE_PCAP
-            #                                   ):
-            #     print_error("Ping test failed after attenuation change.")
-            #     continue
+                # if not lenovo.run_vxlan_ping_test(tested_node,
+                #                                   PING_DURATION,
+                #                                   filename,
+                #                                   lenovo_dynamic_log_dir,
+                #                                   packet_size,
+                #                                   SAVE_PCAP
+                #                                   ):
+                #     print_error("Ping test failed after attenuation change.")
+                #     continue
 
-            print_info(f"Stopping getting trace")
-            stop_saving_trace(stop_event, trace_thread)
+                print_info(f"Stopping getting trace")
+                stop_saving_trace(stop_event, trace_thread)
 
     print_info(f"Reverse synchronisation on Amarisoft and Lenovo")
     lenovo.ntp_off(prev_ntp_lenovo)
