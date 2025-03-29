@@ -1,13 +1,18 @@
 import os
 import posixpath
 import stat
-from typing import Optional, Tuple
-import paramiko
+import sys
 
+import paramiko
+import logging
+
+from typing import Optional, Tuple
 from hosts.host import Host
 from utils import print_info, print_success, print_error
 
+from script.custom_formatter import CustomFormatter
 from script.hosts.ntp_ip_node import NtpIpNode
+from script.stream_to_logger import StreamToLogger
 
 
 class LinuxHost(Host):
@@ -59,7 +64,35 @@ class LinuxHost(Host):
         except Exception as e:
             print_error(f"Exception while creating log directory {directory_path}: {e}")
             return False
-        
+
+
+    # TODO - check stream logger on lenovo because there is log dir that dont match this pc
+    def setup_logging(self, results_dir: str):
+        # Configure the root logger
+        logger = logging.getLogger()
+        logger.setLevel(logging.INFO)
+
+        # Disable propagation to avoid duplicates in the root logger
+        logger.propagate = False
+
+        # Create file handler
+        file_handler = logging.FileHandler(f"{results_dir}/run_logs.log", mode='w', encoding='utf-8')
+        file_handler.setLevel(logging.INFO)
+        file_handler.setFormatter(CustomFormatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+        # Create console handler
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+        console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+        # Add handlers to the logger
+        logger.addHandler(file_handler)
+        logger.addHandler(console_handler)
+
+        # Redirect stdout and stderr to the logger
+        sys.stdout = StreamToLogger(logging.getLogger('STDOUT'), logging.INFO)
+        sys.stderr = StreamToLogger(logging.getLogger('STDERR'), logging.ERROR)
+
 
     def download_logs(self, sftp, remote_dir, local_dir):
         # Recursively download all files and subdirectories in a remote directory to a local directory.
