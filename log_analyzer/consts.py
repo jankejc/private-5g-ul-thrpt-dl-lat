@@ -8,4 +8,4 @@ TYPES_OF_LOGS = ["ping_logs"] # pcaps also?
 
 PATH_TO_LOGS_RESULTS = ["..", RESULTS, MODE, TEST_NAME]
 
-BOXPLOT_FOLDER_NAME = "../analysis/boxplots/20250404-071509_first_full"
+BOXPLOT_FOLDER_NAME = f"../analysis/boxplots/{MODE}/{TEST_NAME}"
