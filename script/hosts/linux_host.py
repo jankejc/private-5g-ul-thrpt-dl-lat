@@ -10,18 +10,17 @@ from typing import Optional, Tuple
 from hosts.host import Host
 from utils import print_info, print_success, print_error
 
-from script.custom_formatter import CustomFormatter
-from script.hosts.ntp_ip_node import NtpIpNode
-from script.stream_to_logger import StreamToLogger
+from custom_formatter import CustomFormatter
+from hosts.ntp_ip_node import NtpIpNode
+from stream_to_logger import StreamToLogger
 
 
 class LinuxHost(Host):
-    def __init__(self, log_dir: str, min_ping_interval: Optional[float], **kwargs):
+    def __init__(self, log_dir: Optional[str], min_ping_interval: Optional[str], **kwargs):
         super().__init__(**kwargs)
         self.log_dir = log_dir
         self.min_ping_interval = min_ping_interval
         self.ssh_client: Optional[paramiko.SSHClient] = None
-
 
     def connect(self) -> bool:
         try:
@@ -34,12 +33,10 @@ class LinuxHost(Host):
             print_error(f"Connection error to {self.management_ip}: {e}")
             return False
 
-
     def disconnect(self) -> None:
         if self.ssh_client:
             self.ssh_client.close()
             print_info(f"Disconnected from {self.management_ip}.")
-
 
     def execute_command(self, command: str) -> Tuple[str, str, int]:
         if not self.ssh_client:
@@ -49,7 +46,6 @@ class LinuxHost(Host):
         exit_status = stdout.channel.recv_exit_status()
 
         return stdout.read().decode(), stderr.read().decode(), exit_status
-
 
     def setup_log_directory(self, directory_path: str) -> bool:
         try:
@@ -65,9 +61,9 @@ class LinuxHost(Host):
             print_error(f"Exception while creating log directory {directory_path}: {e}")
             return False
 
-
-    # TODO - check stream logger on lenovo because there is log dir that dont match this pc
     def setup_logging(self, results_dir: str):
+        self.setup_log_directory(results_dir)
+
         # Configure the root logger
         logger = logging.getLogger()
         logger.setLevel(logging.INFO)
@@ -92,7 +88,6 @@ class LinuxHost(Host):
         # Redirect stdout and stderr to the logger
         sys.stdout = StreamToLogger(logging.getLogger('STDOUT'), logging.INFO)
         sys.stderr = StreamToLogger(logging.getLogger('STDERR'), logging.ERROR)
-
 
     def download_logs(self, sftp, remote_dir, local_dir):
         # Recursively download all files and subdirectories in a remote directory to a local directory.
@@ -180,7 +175,6 @@ class LinuxHost(Host):
             # If the original line was active (not commented), return the previous IP; if it was commented, return None.
             return current_ip if current_line.startswith("NTP=") else None
 
-
     def ntp_off(self, prev_ntp_ip: str):
         """
         Restores the previous NTP server if provided.
@@ -200,4 +194,4 @@ class LinuxHost(Host):
 
 
 
-        
+

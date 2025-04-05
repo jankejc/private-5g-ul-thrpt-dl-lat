@@ -17,6 +17,10 @@ class AmarisoftHost(LinuxFiveGCoreHost):
         self.remote_api_port = remote_api_port
 
 
+    def redirect_ping(self):
+        self.execute_command("/root/mme/lte_init.sh enp0s31f6 enp0s20f0u9")
+
+
     def save_trace(self, amarisoft_dynamic_log_dir: str):
         now = datetime.now()
         filename = now.strftime("%H%M%S") + f"-{int(now.microsecond / 1000):03d}"
