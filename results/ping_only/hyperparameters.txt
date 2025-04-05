@@ -33,7 +33,6 @@ CONFIG_FILES = [
     "pb-178-ul-highTp-autoCSI-TRSonSSB.cfg",
     # "pb-178-ul-highTp-autoCSI-TRSonSSB-prach-128-sr-per-1.cfg",
     "pb-178-ul-highTp-autoCSI-TRSonSSB-prach-128.cfg",
-    "pb-178-ul-highTp-autoCSI-TRSonSSB-rx-to-tx-lat-2.cfg",
     "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1.cfg",
     "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1-uss.cfg",
     "pb-178-ul-highTp-defCSI-20.cfg",
