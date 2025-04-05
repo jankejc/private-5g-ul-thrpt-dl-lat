@@ -1,11 +1,11 @@
 RESULTS = 'results'
-BASE_STATION = 'amarisoft_classic'
-TEST_NAME = 'full_tests_rx_gain_50'
-LOGS = 'logs'
-SIDE = ["client", "server"]
-PING_PACKET_SIZES = ["16", "512", "1436"]
-TYPES_OF_LOGS = ["iperf_logs", "ping_logs"]
+MODE = "ping_only" # also "throughput_only" or "ping_and_throughput"
+TEST_NAME = "20250404-071509_first_full"
+# LOGS = 'logs'
+# SIDE = ["client", "server"]
+PING_PACKET_SIZES = ["56B"]
+TYPES_OF_LOGS = ["ping_logs"] # pcaps also?
 
-PATH_TO_LOGS_RESULTS = ["..", "..", RESULTS, BASE_STATION,TEST_NAME]
+PATH_TO_LOGS_RESULTS = ["..", RESULTS, MODE, TEST_NAME]
 
-BOXPLOT_FOLDER_NAME = "testing_boxplots_script_2"
+BOXPLOT_FOLDER_NAME = "../analysis/boxplots/20250404-071509_first_full"

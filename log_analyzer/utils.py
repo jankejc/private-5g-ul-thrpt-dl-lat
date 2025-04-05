@@ -40,7 +40,7 @@ def parse_folder_structure(directory):
     return traverse(directory, seen_folders)
 
 
-def organize_file_structure(results, base_station, test_name, logs, side, ping_packet_sizes, types_of_logs, path_to_logs_results):
+def organize_file_structure(results, mode, test_name, ping_packet_sizes, types_of_logs, path_to_logs_results):
     """
     Organizes the parsed folder structure into a more organized format as required.
     """
@@ -53,13 +53,13 @@ def organize_file_structure(results, base_station, test_name, logs, side, ping_p
     # Initialize the structure to match the desired format
     log_file_structure = [
         [results],
-        [base_station],
+        [mode],
         [test_name],
-        [logs],
+        # [logs],
         [],  # Configs will be populated below
         [],  # Attenuations will be populated below
-        [],  # Bandwidths will be populated below
-        [*side],
+        # [],  # Bandwidths will be populated below
+        # [*side],
         [*ping_packet_sizes],
         [*types_of_logs]
     ]
@@ -67,7 +67,7 @@ def organize_file_structure(results, base_station, test_name, logs, side, ping_p
     # Initialize categories to collect folder names
     configs = []
     attenuations = []
-    bandwidths = []
+    # bandwidths = []
 
     # Loop through the folder structure to populate the categories
     def find_category_folders(structure):
@@ -76,21 +76,17 @@ def organize_file_structure(results, base_station, test_name, logs, side, ping_p
                 find_category_folders(item)  # Recurse through nested directories
             else:  # This is a folder name
                 print(f"Found folder: {item}")  # Debug print to see all folder names
-                if "config" in item:
+                if ".cfg" in item:
                     configs.append(item)
-                if "attenuation" in item:  # Look for folders containing "attenuation"
+                if "attn" in item:  # Look for folders containing "dB"
                     attenuations.append(item)
-                if "M" in item:  # Assuming bandwidth names contain 'M'
-                    bandwidths.append(item)
 
     # Start finding the categories
     find_category_folders(folder_structure)
 
     # Ensure categories are populated even if no folder was found
-    log_file_structure[4] = configs if configs else []
-    log_file_structure[5] = attenuations if attenuations else []
-    if bandwidths:
-        log_file_structure[6] = bandwidths
+    log_file_structure[3] = configs if configs else []
+    log_file_structure[4] = attenuations if attenuations else []
 
     return log_file_structure
 
