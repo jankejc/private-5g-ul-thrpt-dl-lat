@@ -1,0 +1,46 @@
+# FLAGS
+TEST_PING = False
+TEST_THROUGHPUT = True
+SAVE_PCAP = True # I don't see scenario where it should be False. It needs to be True when TEST_THROUGHPUT is True.
+
+LIDAR_OUT_INTERFACE = "ether23"
+GET_TRACE_INTERVAL = 1 # By looking at created files Amari respond in about 400ms
+PING_COUNT_CONNECTION_CHECK = 100
+PING_COUNT_UPLINK = 100
+TEST_SEC_DURATION = 20
+PING_TEST_COUNT = int(TEST_SEC_DURATION / float(LENOVO["min_ping_interval"].replace(",", "."))) # test duration / lenovo interval
+PING_REPETITION = 30
+DEFAULT_LINUX_PING_PAYLOAD = 56
+MAX_WAIT_TIME = 1200  # 20 minutes max wait for UE connection, 10 minutes too low when max lidar
+ATTENUATION_VALUES = [0] # potentially dangerous for setup
+# PACKET_SIZES = [16, 256, 512, 1024, 1436]
+PACKET_SIZES = [56]
+CONFIG_FILES = [
+    "pb-178-tdd-low-latency-20.cfg",
+    "pb-178-tdd-low-latency.cfg",
+    "pb-178-tdd-low-latency-no-rx-to-tx-lat.cfg",
+    "pb-178-tdd-low-latency-prach-160.cfg",
+    "pb-178-tdd-low-latency-rx-to-tx-lat-1.cfg",
+    "pb-178-tdd-low-latency-rx-to-tx-lat-2.cfg",
+    "pb-178-tdd-low-latency-rx-to-tx-lat-4.cfg",
+    "pb-178-tdd-low-latency-sr-per-1.cfg",
+    "pb-178-ul-highTp-autoCSI-noTRS-20.cfg",
+    "pb-178-ul-highTp-autoCSI-noTRS.cfg",
+    # "pb-178-ul-highTp-autoCSI-noTRS-prach-128-sr-per-1.cfg",
+    "pb-178-ul-highTp-autoCSI-noTRS-prach-128.cfg",
+    "pb-178-ul-highTp-autoCSI-noTRS-sr-per-1.cfg",
+    "pb-178-ul-highTp-autoCSI-TRSonSSB-20.cfg",
+    "pb-178-ul-highTp-autoCSI-TRSonSSB.cfg",
+    # "pb-178-ul-highTp-autoCSI-TRSonSSB-prach-128-sr-per-1.cfg",
+    "pb-178-ul-highTp-autoCSI-TRSonSSB-prach-128.cfg",
+    "pb-178-ul-highTp-autoCSI-TRSonSSB-rx-to-tx-lat-2.cfg",
+    "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1.cfg",
+    "pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1-uss.cfg",
+    "pb-178-ul-highTp-defCSI-20.cfg",
+    "pb-178-ul-highTp-defCSI.cfg",
+    "pb-178-ul-highTp-defCSI-no-trs.cfg",
+    "pb-178-ul-highTp-defCSI-prach-128.cfg",
+    "pb-178-ul-highTp-defCSI-rx-to-tx-lat-2.cfg",
+    "pb-178-ul-highTp-defCSI-rx-to-tx-lat-4.cfg",
+    "pb-178-ul-highTp-defCSI-sr-per-1.cfg"
+]
