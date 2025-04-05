@@ -40,4 +40,4 @@ class AmarisoftHost(LinuxFiveGCoreHost):
 
         ws.close()
 
-        self.execute_command(f"sudo mkdir -p {amarisoft_dynamic_log_dir} && echo \"{result}\" > {amarisoft_dynamic_log_dir}/{filename} 2>&1")
+        self.execute_command(f"sudo mkdir -p {amarisoft_dynamic_log_dir} && echo \"{result}\" > {amarisoft_dynamic_log_dir}/{filename}.log 2>&1")
