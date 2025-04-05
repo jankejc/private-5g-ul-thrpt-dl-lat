@@ -1,12 +1,11 @@
 import os
 import re
+import csv
 
 from matplotlib import pyplot as plt
 
 
 from pathlib import Path
-
-from setuptools.msvc import PLAT_SPEC_TO_RUNTIME
 
 from log_analyzer.consts import BOXPLOT_FOLDER_NAME
 from log_analyzer.utils import print_error, print_success
@@ -119,51 +118,71 @@ class LogAnalyzer:
         return f"{first_line}\n{second_line}"
 
     def plot_boxplots_for_tests(self):
-        for config in self.all_config_rtt_values:
-            for config_name, measurements in config.items():
-                attenuation_groups = {}
-                for measurement in measurements:
-                    attenuation = measurement['attn']
-                    if attenuation not in attenuation_groups:
-                        attenuation_groups[attenuation] = []
-                    attenuation_groups[attenuation].append(measurement)
+        csv_table_path = os.path.join(self.boxplot_path, "boxplot_stats.csv")
+        with open(csv_table_path, mode='w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(["configuration", "attenuation (dB)", "packet size (B)", "mean (ms)", "median (ms)", "q1 (ms)", "q3 (ms)"])
 
-                for attenuation, group_measurements in attenuation_groups.items():
-                    plt.figure(figsize=(6, 7))
-                    rtt_data = []
-                    labels = []
+            for config in self.all_config_rtt_values:
+                for config_name, measurements in config.items():
+                    attenuation_groups = {}
+                    for measurement in measurements:
+                        attenuation = measurement['attn']
+                        if attenuation not in attenuation_groups:
+                            attenuation_groups[attenuation] = []
+                        attenuation_groups[attenuation].append(measurement)
 
-                    for measurement in group_measurements:
-                        size = measurement['size']
-                        rtt_values = measurement['rtt_values']
+                    for attenuation, group_measurements in attenuation_groups.items():
+                        plt.figure(figsize=(6, 7))
+                        rtt_data = []
+                        labels = []
 
-                        rtt_data.append(rtt_values)
-                        labels.append(int(re.sub(r'[a-zA-Z]', '', size)))
+                        for measurement in group_measurements:
+                            size = measurement['size']
+                            rtt_values = measurement['rtt_values']
 
-                    labels.sort()
-                    for i in range(len(labels)):
-                        labels[i] = f"{labels[i]}"
-                    boxplot = plt.boxplot(rtt_data, labels=labels, patch_artist=False, showmeans=True)
-                    plt.title(
-                        f"RTT Distributions for \n {self.format_config_name_for_boxplot_title(config_name)}\n(Attenuation: {''.join([char for char in attenuation if char.isdigit()])}dB)", fontsize=24)
-                    plt.xlabel("Packet Size [bytes]", fontsize=20)
-                    plt.ylabel("RTT [ms]", fontsize=20)
-                    plt.xticks(rotation=45, ha='right', fontsize=20)
-                    plt.yticks(fontsize=20)
-                    plt.xlim(0.85, 1.15)  # zoom into the only boxplot
-                    for i, rtt_values in enumerate(rtt_data):
-                        median = boxplot['medians'][i].get_ydata()[0]
-                        path = boxplot['boxes'][i].get_path()
-                        vertices = path.vertices
-                        q1 = vertices[0][1]  # Bottom of the box
-                        q3 = vertices[2][1]  # Top of the box
-                        mean = boxplot['means'][i].get_ydata()[0] if 'means' in boxplot else None
+                            rtt_data.append(rtt_values)
+                            labels.append(int(re.sub(r'[a-zA-Z]', '', size)))
 
-                        x = i + 1
-                    plt.tight_layout()
-                    filename = f"{config_name}_{attenuation}dB_boxplots.png"
-                    plt.savefig(os.path.join(self.boxplot_path, filename))
-                    plt.close()
+                        labels.sort()
+                        for i in range(len(labels)):
+                            labels[i] = f"{labels[i]}"
+                        boxplot = plt.boxplot(rtt_data, labels=labels, patch_artist=False, showmeans=True)
+                        plt.title(
+                            f"RTT Distributions for \n {self.format_config_name_for_boxplot_title(config_name)}\n(Attenuation: {self.extract_digits(attenuation)}dB)", fontsize=24)
+                        plt.xlabel("Packet Size [bytes]", fontsize=20)
+                        plt.ylabel("RTT [ms]", fontsize=20)
+                        plt.xticks(rotation=45, ha='right', fontsize=20)
+                        plt.yticks(fontsize=20)
+                        plt.xlim(0.85, 1.15)  # zoom into the only boxplot
+                        for i, rtt_values in enumerate(rtt_data):
+                            median = boxplot['medians'][i].get_ydata()[0]
+                            path = boxplot['boxes'][i].get_path()
+                            vertices = path.vertices
+                            q1 = vertices[0][1]  # Bottom of the box
+                            q3 = vertices[2][1]  # Top of the box
+                            mean = boxplot['means'][i].get_ydata()[0] if 'means' in boxplot else None
+
+                            x = i + 1
+
+                            writer.writerow([
+                                config_name,
+                                self.extract_digits(attenuation),
+                                self.extract_digits(size),
+                                round(mean, 3),
+                                round(median, 3),
+                                round(q1, 3),
+                                round(q3, 3)
+                            ])
+
+                        plt.tight_layout()
+                        filename = f"{config_name}_{attenuation}dB_boxplots.png"
+                        plt.savefig(os.path.join(self.boxplot_path, filename))
+                        plt.close()
+
+
+    def extract_digits(self, text) -> str:
+        return ''.join(char for char in text if char.isdigit())
 
 
     def parse_folder_structure(self):
