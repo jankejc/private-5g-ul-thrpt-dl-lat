@@ -44,7 +44,7 @@ Usage
 
     To run the analysis, simply execute the main.py file.
 
-    python main.py
+    python3 -m log_analyzer.main from the main git directory
 
     This will:
 
