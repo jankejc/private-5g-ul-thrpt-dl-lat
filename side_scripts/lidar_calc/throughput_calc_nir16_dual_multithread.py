@@ -6,12 +6,9 @@ import multiprocessing
 import os
 
 # Konfiguracja użytkownika
-PCAP_FILES = ["512_10_90_nir16_dual.pcap", "1024_10_90_nir16_dual.pcap", "2048_10_90_nir16_dual.pcap", "512_20_90_nir16_dual.pcap", "1024_20_90_nir16_dual.pcap",
-              "512_10_180_nir16_dual.pcap", "1024_10_180_nir16_dual.pcap", "2048_10_180_nir16_dual.pcap", "512_20_180_nir16_dual.pcap", "1024_20_180_nir16_dual.pcap",
-              "512_10_270_nir16_dual.pcap", "1024_10_270_nir16_dual.pcap", "2048_10_270_nir16_dual.pcap", "512_20_270_nir16_dual.pcap", "1024_20_270_nir16_dual.pcap",
-              "512_10_360_nir16_dual.pcap", "1024_10_360_nir16_dual.pcap", "2048_10_360_nir16_dual.pcap", "512_20_360_nir16_dual.pcap", "1024_20_360_nir16_dual.pcap"]  # Lista plików do przetworzenia
-TARGET_IP = "169.254.34.10"
-NUM_PROCESSES = 20  # Liczba rdzeni do wykorzystania
+PCAP_FILES = ["test-uss.pcap"]  # Lista plików do przetworzenia
+TARGET_IP = "10.15.20.239"
+NUM_PROCESSES = 6  # Liczba rdzeni do wykorzystania
 
 def process_pcap(pcap_file):
     start_time = time.time()
@@ -35,9 +32,9 @@ def process_pcap(pcap_file):
     df["time"] = df["time"] - df["time"].min()  # Normalizujemy czas od 0 sekundy
 
     # Analiza przepustowości (przepustowość w Mebibitach na sekundę - Mibps)
-    start_time_interval = 5
-    end_time_interval = 605
-    interval = 60
+    start_time_interval = 1
+    end_time_interval = 11
+    interval = 10
     results = []
     throughput_means = []
 
