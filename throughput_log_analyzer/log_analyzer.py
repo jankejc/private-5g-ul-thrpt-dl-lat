@@ -1,17 +1,15 @@
 import os
-import re
 import csv
 import pandas as pd
+import numpy as np
 
 from scapy.all import PcapReader
-from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from throughput_log_analyzer.consts import BOXPLOT_FOLDER_NAME
-from throughput_log_analyzer.utils import print_error, print_success
 
 
 class LogAnalyzer:
@@ -136,11 +134,12 @@ class LogAnalyzer:
 
         return f"{first_line}\n{second_line}"
 
-    def plot_boxplots_for_tests(self):
-        csv_table_path = os.path.join(self.boxplot_path, "boxplot_stats.csv")
+    def prepare_raw_results_to_file(self):
+        csv_table_path = os.path.join(self.boxplot_path, "raw_boxplot_stats.csv")
         with open(csv_table_path, mode='w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(["configuration", "attenuation (dB)", "packet size (B)", "mean (ms)", "median (ms)", "q1 (ms)", "q3 (ms)"])
+            writer.writerow(["configuration", "attenuation (dB)", "packet size (B)", "mean (Mibps)", "median (Mibps)",
+                             "std (Mibps)", "min (Mibps)", "max (Mibps)", "q1 (Mibps)", "q3 (Mibps)"])
 
             for config in self.all_config_throughput_values:
                 for config_name, measurements in config.items():
@@ -152,37 +151,21 @@ class LogAnalyzer:
                         attenuation_groups[attenuation].append(measurement)
 
                     for attenuation, group_measurements in attenuation_groups.items():
-                        plt.figure(figsize=(6, 7))
-                        throughput_data = []
-                        labels = []
-
                         for measurement in group_measurements:
                             size = measurement['size']
                             throughput_values = measurement['throughput_values']
 
-                            throughput_data.append(throughput_values)
-                            labels.append(int(re.sub(r'[a-zA-Z]', '', size)))
+                            if not throughput_values:
+                                continue
 
-                        labels.sort()
-                        for i in range(len(labels)):
-                            labels[i] = f"{labels[i]}"
-                        boxplot = plt.boxplot(throughput_data, labels=labels, patch_artist=False, showmeans=True)
-                        plt.title(
-                            f"Throughput Distributions for \n {self.format_config_name_for_boxplot_title(config_name)}\n(Attenuation: {self.extract_digits(attenuation)}dB)", fontsize=24)
-                        plt.xlabel("Packet Size [bytes]", fontsize=20)
-                        plt.ylabel("Throughput [Mibps]", fontsize=20)
-                        plt.xticks(rotation=45, ha='right', fontsize=20)
-                        plt.yticks(fontsize=20)
-                        plt.xlim(0.85, 1.15)  # zoom into the only boxplot
-                        for i, throughput_values in enumerate(throughput_data):
-                            median = boxplot['medians'][i].get_ydata()[0]
-                            path = boxplot['boxes'][i].get_path()
-                            vertices = path.vertices
-                            q1 = vertices[0][1]  # Bottom of the box
-                            q3 = vertices[2][1]  # Top of the box
-                            mean = boxplot['means'][i].get_ydata()[0] if 'means' in boxplot else None
-
-                            x = i + 1
+                            values = np.array(throughput_values)
+                            mean = np.mean(values)
+                            median = np.median(values)
+                            std = np.std(values)
+                            min_val = np.min(values)
+                            max_val = np.max(values)
+                            q1 = np.percentile(values, 25)
+                            q3 = np.percentile(values, 75)
 
                             writer.writerow([
                                 config_name,
@@ -190,15 +173,12 @@ class LogAnalyzer:
                                 self.extract_digits(size),
                                 round(mean, 3),
                                 round(median, 3),
+                                round(std, 3),
+                                round(min_val, 3),
+                                round(max_val, 3),
                                 round(q1, 3),
                                 round(q3, 3)
                             ])
-
-                        plt.tight_layout()
-                        filename = f"{config_name}_{attenuation}dB_boxplots.png"
-                        plt.savefig(os.path.join(self.boxplot_path, filename))
-                        plt.close()
-
 
     def extract_digits(self, text) -> str:
         return ''.join(char for char in text if char.isdigit())
@@ -279,4 +259,4 @@ class LogAnalyzer:
         self.setup()
         self.parse_folder_structure()
         print(f"{self.full_data_dict=}")
-        self.plot_boxplots_for_tests()
+        self.prepare_raw_results_to_file()
