@@ -1,6 +1,6 @@
 RESULTS = 'results_trace'
-MODE = "throughput_only"
-TEST_NAME = "20250405-150210_thrpt_only_second_half"
+MODE = "ping_only"
+TEST_NAME = "20250404-071509_ping_only_full_test"
 # LOGS = 'logs'
 # SIDE = ["client", "server"]
 PING_PACKET_SIZES = ["56B"]
@@ -8,4 +8,4 @@ TYPES_OF_LOGS = ["rep_1", "rep_2", "rep_3", "rep_4", "rep_5", "rep_6", "rep_7", 
 
 PATH_TO_LOGS_RESULTS = ["..", RESULTS, MODE, TEST_NAME]
 
-BOXPLOT_FOLDER_NAME = f"../analysis/boxplots/{MODE}/trace_{TEST_NAME}"
+BOXPLOT_FOLDER_NAME = f"../analysis/boxplots/{MODE}/trace_snr_{TEST_NAME}"

@@ -1,6 +1,6 @@
-from trace_log_analyzer.consts import RESULTS, MODE, TEST_NAME, PING_PACKET_SIZES, TYPES_OF_LOGS, PATH_TO_LOGS_RESULTS
-from trace_log_analyzer.log_analyzer import LogAnalyzer
-from trace_log_analyzer.utils import organize_file_structure
+from trace_snr_log_analyzer.consts import RESULTS, MODE, TEST_NAME, PING_PACKET_SIZES, TYPES_OF_LOGS, PATH_TO_LOGS_RESULTS
+from trace_snr_log_analyzer.log_analyzer import LogAnalyzer
+from trace_snr_log_analyzer.utils import organize_file_structure
 
 
 def main():

@@ -8,8 +8,8 @@ from matplotlib import pyplot as plt
 
 from pathlib import Path
 
-from trace_log_analyzer.consts import BOXPLOT_FOLDER_NAME
-from trace_log_analyzer.utils import print_error, print_success
+from trace_snr_log_analyzer.consts import BOXPLOT_FOLDER_NAME
+from trace_snr_log_analyzer.utils import print_error, print_success
 
 
 class LogAnalyzer:
