@@ -1,12 +1,11 @@
 import os
 import re
 import csv
-import pandas as pd
+import numpy as np
 
-from scapy.all import PcapReader
-from tqdm import tqdm
+from matplotlib import pyplot as plt
 
-from concurrent.futures import ProcessPoolExecutor, as_completed
+
 from pathlib import Path
 
 from trace_log_analyzer.consts import BOXPLOT_FOLDER_NAME
@@ -20,8 +19,8 @@ class LogAnalyzer:
         self.ping_sizes = []
         self.full_data_dict = []
         self.partial_means = []
-        self.throughput_for_file = []
-        self.all_config_throughput_values = []
+        self.snr_for_file = []
+        self.all_config_snr_values = []
         self.attenuations = []
 
     def setup(self):
@@ -30,6 +29,7 @@ class LogAnalyzer:
         self.get_ping_sizes()
         self.get_attenuations()
 
+
     def extract_relative_path(self, full_path):
         path_str = str(full_path)
         start_index = path_str.find('.cfg')
@@ -37,52 +37,58 @@ class LogAnalyzer:
             raise ValueError("'.cfg' not found in the given path.")
         return path_str[start_index:]
 
-    def compute_avg_throughput(self, pcap_file, src_ip="10.15.20.10", dst_ip="10.15.20.239", start_sec=5, end_sec=25) -> float:
-        timestamps = []
-        sizes = []
+    def extract_avg_snr(self, snr_log: str):
+        snr_values = []
+        inside_cell = False
 
-        with PcapReader(str(pcap_file)) as pcap:
-            for pkt in pcap:
-                if pkt.haslayer("IP"):
-                    ip_layer = pkt["IP"]
-                    if ip_layer.src == src_ip and ip_layer.dst == dst_ip:
-                        timestamps.append(pkt.time)
-                        sizes.append(len(pkt))
+        try:
+            with open(snr_log, 'r') as f:
+                for line in f:
+                    line = line.strip()
 
-        if not timestamps:
-            print(f"No matching packets found in {pcap_file}.")
-            return 0.0
+                    if '"pusch_snr"' in line or 'pusch_snr' in line:
+                        try:
+                            # This will match: pusch_snr: 30.1 or "pusch_snr": 30.1
+                            snr_str = line.split(":")[1].strip().rstrip(',')
+                            snr_val = float(snr_str)
+                            snr_values.append(snr_val)
 
-        df = pd.DataFrame({"time": timestamps, "size": sizes})
-        df["time"] = df["time"] - df["time"].min()
-        mask = (df["time"] >= start_sec) & (df["time"] < end_sec)
-        interval_df = df.loc[mask]
+                        except Exception as e:
+                            print(f"Skipping malformed SNR line: {line}, error: {e}")
+                            continue
 
-        if interval_df.empty:
-            print(f"No packets found in interval {start_sec}–{end_sec}s for {pcap_file}.")
-            return 0.0
+            if snr_values:
+                avg_snr = sum(snr_values) / len(snr_values)
+                print_success(f"Test {snr_log}: Avg SNR = {avg_snr:.3f} dB")
+                return avg_snr
+            else:
+                print_error(f"Test {snr_log}: No valid SNR values found.")
+                return None
 
-        total_bits = interval_df["size"].sum() * 8
-        duration = end_sec - start_sec
-        throughput_mibps = total_bits / duration / (1024 * 1024)
-        return throughput_mibps
+        except FileNotFoundError:
+            print_error(f"Test {snr_log}: File not found.")
+        except Exception as e:
+            print_error(f"Test {snr_log}: Unexpected error: {e}")
 
     def prepare_dict_for_test_data(self, file, mean):
         parametrizable_test_metrics = {}
+
         for folders in self.file_structure:
-            for folder_name in folders:
-                if folder_name in list(file.parts):
-                    if "B" in folder_name:
-                        parametrizable_test_metrics.update({"size": folder_name})
-                        parametrizable_test_metrics.update({"mean_throughput_value": mean})
-                    elif ".cfg" in folder_name:
-                        parametrizable_test_metrics.update({"config": folder_name})
-                    else:
-                        parametrizable_test_metrics.update({folder_name: folder_name})
+            # if len(folders) > 1:
+                for folder_name in folders:
+                    if folder_name in list(file.parts):
+                        if "B" in folder_name:
+                            parametrizable_test_metrics.update({"size": folder_name})
+                            parametrizable_test_metrics.update({"mean_snr_value": mean})
+                        elif ".cfg" in folder_name:
+                            parametrizable_test_metrics.update({"config": folder_name})
+                        else:
+                            parametrizable_test_metrics.update({folder_name: folder_name})
+
         self.full_data_dict.append(parametrizable_test_metrics)
 
-    def update_throughput_values_for_config_dict(self, file, throughput_values):
-        throughput_values_for_config_dict = {}
+    def update_snr_vaules_for_config_dict(self,file, snr_vaules):
+        snr_vaules_for_config_dict = {}
         current_config = None
         for folders in self.file_structure:
             for folder_name in folders:
@@ -90,32 +96,51 @@ class LogAnalyzer:
                     if ".cfg" in folder_name:
                         current_config = folder_name
                     elif "B" in folder_name:
-                        throughput_values_for_config_dict.update({"size": folder_name})
-                        throughput_values_for_config_dict.update({"throughput_values": throughput_values})
+                        snr_vaules_for_config_dict.update({"size": folder_name})
+                        snr_vaules_for_config_dict.update({"snr_values": snr_vaules})
                     elif "attn" in folder_name:
-                        throughput_values_for_config_dict.update({"attn": folder_name})
+                        snr_vaules_for_config_dict.update({"attn": folder_name})
 
-        for config_dict in self.all_config_throughput_values:
+        for config_dict in self.all_config_snr_values:
             if current_config in config_dict:
-                config_dict[current_config].append(throughput_values_for_config_dict)
+                config_dict[current_config].append(snr_vaules_for_config_dict)
                 break
 
-    def calculate_mean_value(self, values):
-        return sum(values) / len(values) if values else 0
+
+    def calculate_mean_value(self, partial_means):
+        sum = 0
+        for value in partial_means:
+            sum+=value
+        return sum/len(partial_means)
 
     def format_config_name_for_boxplot_title(self, config_name):
+        # Remove `.cfg` if present
         config_name = config_name.replace('.cfg', '')
-        parts = config_name.split('-')[2:]
+
+        # Split by '-'
+        parts = config_name.split('-')
+
+        # Remove first two parts (e.g. "pb", "178")
+        parts = parts[2:]
+
+        # If odd number of words, place more on second line
         half = len(parts) // 2
-        return f"{'-'.join(parts[:half])}\n{'-'.join(parts[half:])}"
+        first_line = '-'.join(parts[:half])
+        second_line = '-'.join(parts[half:])
+
+        return f"{first_line}\n{second_line}"
 
     def plot_boxplots_for_tests(self):
         csv_table_path = os.path.join(self.boxplot_path, "boxplot_stats.csv")
         with open(csv_table_path, mode='w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(["configuration", "attenuation (dB)", "packet size (B)", "mean (ms)", "median (ms)", "q1 (ms)", "q3 (ms)"])
+            writer.writerow([
+                "configuration", "attenuation (dB)", "packet size (B)",
+                "mean (dB)", "median (dB)", "std (dB)", "min (dB)", "max (dB)",
+                "q1 (dB)", "q3 (dB)"
+            ])
 
-            for config in self.all_config_throughput_values:
+            for config in self.all_config_snr_values:
                 for config_name, measurements in config.items():
                     attenuation_groups = {}
                     for measurement in measurements:
@@ -125,43 +150,85 @@ class LogAnalyzer:
                         attenuation_groups[attenuation].append(measurement)
 
                     for attenuation, group_measurements in attenuation_groups.items():
-                        throughput_data = []
-                        sizes = []
+                        plt.figure(figsize=(6, 7))
+
+                        size_to_snr_values = {}
+
                         for measurement in group_measurements:
                             size = measurement['size']
-                            throughput_values = measurement['throughput_values']
-                            throughput_data.extend(throughput_values)
-                            sizes.append(int(re.sub(r'[a-zA-Z]', '', size)))
+                            size_clean = int(re.sub(r'[a-zA-Z]', '', size))
 
-                        if not throughput_data:
-                            continue
+                            if size_clean not in size_to_snr_values:
+                                size_to_snr_values[size_clean] = []
 
-                        mean = self.calculate_mean_value(throughput_data)
-                        median = float(pd.Series(throughput_data).median())
-                        q1 = float(pd.Series(throughput_data).quantile(0.25))
-                        q3 = float(pd.Series(throughput_data).quantile(0.75))
+                            size_to_snr_values[size_clean].extend(measurement['snr_values'])
 
-                        writer.writerow([
-                            config_name,
-                            self.extract_digits(attenuation),
-                            self.extract_digits(str(sizes[0]) if sizes else ""),
-                            round(mean, 3),
-                            round(median, 3),
-                            round(q1, 3),
-                            round(q3, 3)
-                        ])
+                        # Then sort and prepare for plotting
+                        labels, snr_data = zip(*sorted(size_to_snr_values.items()))
+                        labels = [str(label) for label in labels]
+
+                        boxplot = plt.boxplot(snr_data, labels=labels, patch_artist=False, showmeans=True)
+                        plt.title(
+                            f"SNR Distributions for \n {self.format_config_name_for_boxplot_title(config_name)}\n(Attenuation: {self.extract_digits(attenuation)}dB)",
+                            fontsize=24)
+                        plt.xlabel("Packet Size [bytes]", fontsize=20)
+                        plt.ylabel("SNR [dB]", fontsize=20)
+                        plt.xticks(rotation=45, ha='right', fontsize=20)
+                        plt.yticks(fontsize=20)
+                        plt.xlim(0.65, 1.35)
+
+                        for i, snr_values in enumerate(snr_data):
+                            snr_array = np.array(snr_values)
+                            mean = np.mean(snr_array)
+                            median = np.median(snr_array)
+                            std = np.std(snr_array)
+                            min_val = np.min(snr_array)
+                            max_val = np.max(snr_array)
+                            q1 = np.percentile(snr_array, 25)
+                            q3 = np.percentile(snr_array, 75)
+
+                            writer.writerow([
+                                config_name,
+                                self.extract_digits(attenuation),
+                                labels[i],
+                                round(mean, 3),
+                                round(median, 3),
+                                round(std, 3),
+                                round(min_val, 3),
+                                round(max_val, 3),
+                                round(q1, 3),
+                                round(q3, 3)
+                            ])
+
+                        plt.tight_layout()
+                        filename = f"{config_name}_{attenuation}dB_boxplots.png"
+                        plt.savefig(os.path.join(self.boxplot_path, filename))
+                        plt.close()
+
 
     def extract_digits(self, text) -> str:
         return ''.join(char for char in text if char.isdigit())
 
-    def parse_folder_structure(self):
-        files_to_process = []
 
+    def parse_folder_structure(self):
         def traverse(path, structure, level=0):
+            # print("level: " + str(level))
+            # print("len(struct): " + str(len(structure)))
             if level == len(structure):
+                snr_values_from_single_file = []
                 for file in path.iterdir():
-                    if file.is_file() and file.suffix == ".pcap" and "pcap" in file.name:
-                        files_to_process.append(file)
+                    if file.is_file() and file.suffix == ".log" in file.name:
+                        print(f"Processing TRACE log file: {file}")
+                        avg_snr = self.extract_avg_snr(file)
+                        relative_file_path = self.extract_relative_path(file)
+                        if avg_snr is not None:
+                            self.snr_for_file.append((relative_file_path, avg_snr))
+                            snr_values_from_single_file.append(float(avg_snr))
+
+                if len(snr_values_from_single_file) > 0:
+                    self.update_snr_vaules_for_config_dict(file, snr_values_from_single_file)
+                    mean_snr_value = self.calculate_mean_value(snr_values_from_single_file)
+                    self.prepare_dict_for_test_data(file, mean_snr_value)
                 return
 
             for folder_name in structure[level]:
@@ -173,31 +240,6 @@ class LogAnalyzer:
         current_dir = Path(__file__).resolve().parent.parent
         traverse(current_dir, self.file_structure)
 
-        print(f"Processing {len(files_to_process)} pcap files using multiprocessing...")
-        with ProcessPoolExecutor(max_workers=16) as executor:
-            future_to_file = {
-                executor.submit(self.compute_avg_throughput, str(pcap_file)): pcap_file
-                for pcap_file in files_to_process
-            }
-
-            progress_bar = tqdm(total=len(future_to_file), desc="Processing .pcap files", ncols=100)
-
-            for future in as_completed(future_to_file):
-                file = future_to_file[future]
-                try:
-                    avg_throughput = future.result()
-                    relative_file_path = self.extract_relative_path(file)
-                    if avg_throughput is not None:
-                        self.throughput_for_file.append((relative_file_path, avg_throughput))
-                        self.update_throughput_values_for_config_dict(file, [float(avg_throughput)])
-                        self.prepare_dict_for_test_data(file, avg_throughput)
-                except Exception as e:
-                    print(f"\n Error processing {file}: {e}")
-                finally:
-                    progress_bar.update(1)
-
-            progress_bar.close()
-
     def prepare_folder_for_graphs(self, folder_name):
         self.boxplot_path = os.path.join('results', folder_name)
         os.makedirs(self.boxplot_path, exist_ok=True)
@@ -208,17 +250,21 @@ class LogAnalyzer:
                 self.ping_sizes = folders.copy()
         self.ping_sizes.append(self.ping_sizes)
 
+
+
     def get_attenuations(self):
         for folders in self.file_structure:
             if any("attn" in item for item in folders):
                 self.attenuations = folders.copy()
         self.attenuations.append(self.attenuations)
 
+
     def put_config_names_into_dict(self):
         for folder_level in self.file_structure:
             for folder_name in folder_level:
                 if ".cfg" in folder_name:
-                    self.all_config_throughput_values.append({folder_name: []})
+                    self.all_config_snr_values.append({folder_name: []})
+
 
     def run(self):
         self.setup()

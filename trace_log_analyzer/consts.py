@@ -1,6 +1,6 @@
 RESULTS = 'results_trace'
-MODE = "ping_only"
-TEST_NAME = "20250404-071509_ping_only_full_test"
+MODE = "throughput_only"
+TEST_NAME = "20250405-150210_thrpt_only_second_half"
 # LOGS = 'logs'
 # SIDE = ["client", "server"]
 PING_PACKET_SIZES = ["56B"]
