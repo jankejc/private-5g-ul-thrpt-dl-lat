@@ -1,0 +1,10 @@
+configuration,attenuation (dB),packet size (B),mean (dB),median (dB),std (dB),min (dB),max (dB),q1 (dB),q3 (dB)
+pb-178-ul-highTp-defCSI-sr-per-1.cfg,0,56,24.553,24.3,2.25,19.7,31.9,22.4,26.2
+pb-178-ul-highTp-defCSI-prach-128.cfg,0,56,25.291,25.0,2.698,20.2,31.5,23.0,27.4
+pb-178-ul-highTp-defCSI-no-trs.cfg,0,56,24.254,24.0,2.398,19.5,32.8,22.3,25.3
+pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1.cfg,0,56,23.623,23.3,2.37,13.2,31.95,22.0,25.1
+pb-178-ul-highTp-defCSI-rx-to-tx-lat-4.cfg,0,56,25.875,25.3,3.04,18.85,33.0,23.5,27.6
+pb-178-ul-highTp-autoCSI-TRSonSSB-sr-per-1-uss.cfg,0,56,24.31,23.8,2.568,16.95,32.5,22.3,26.4
+pb-178-ul-highTp-defCSI-rx-to-tx-lat-2.cfg,0,56,24.593,24.3,2.979,18.9,30.5,22.0,27.4
+pb-178-ul-highTp-defCSI-20.cfg,0,56,25.408,26.1,1.669,17.6,29.1,24.7,26.4
+pb-178-ul-highTp-defCSI.cfg,0,56,25.021,25.0,2.103,20.45,29.45,23.9,26.9

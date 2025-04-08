@@ -1,0 +1,9 @@
+configuration,attenuation (dB),packet size (B),mean,median,std,min,max,q1,q3
+pb-178-tdd-low-latency-rx-to-tx-lat-1.cfg,0,56,25.903,26.0,0.82,17.15,26.2,26.0,26.0
+pb-178-tdd-low-latency-rx-to-tx-lat-2.cfg,0,56,25.908,26.0,0.826,17.0,26.4,26.0,26.0
+pb-178-tdd-low-latency-sr-per-1.cfg,0,56,25.879,26.0,0.793,17.45,26.5,26.0,26.0
+pb-178-tdd-low-latency-prach-160.cfg,0,56,25.872,26.0,0.963,16.9,27.0,26.0,26.0
+pb-178-ul-highTp-autoCSI-TRSonSSB-20.cfg,0,56,26.872,27.0,0.731,20.75,27.0,27.0,27.0
+pb-178-ul-highTp-autoCSI-TRSonSSB-prach-128.cfg,0,56,26.268,26.8,1.351,16.4,27.0,26.0,27.0
+pb-178-tdd-low-latency-no-rx-to-tx-lat.cfg,0,56,25.885,26.0,0.868,16.5,26.2,26.0,26.0
+pb-178-tdd-low-latency-20.cfg,0,56,25.904,26.0,0.849,17.0,26.4,26.0,26.0
