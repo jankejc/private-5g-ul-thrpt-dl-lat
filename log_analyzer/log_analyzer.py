@@ -1,6 +1,7 @@
 import os
 import re
 import csv
+import numpy as np
 
 from matplotlib import pyplot as plt
 
@@ -121,7 +122,11 @@ class LogAnalyzer:
         csv_table_path = os.path.join(self.boxplot_path, "boxplot_stats.csv")
         with open(csv_table_path, mode='w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(["configuration", "attenuation (dB)", "packet size (B)", "mean (ms)", "median (ms)", "q1 (ms)", "q3 (ms)"])
+            writer.writerow([
+                "configuration", "attenuation (dB)", "packet size (B)",
+                "mean (ms)", "median (ms)", "std (ms)", "min (ms)", "max (ms)",
+                "q1 (ms)", "q3 (ms)"
+            ])
 
             for config in self.all_config_rtt_values:
                 for config_name, measurements in config.items():
@@ -144,33 +149,38 @@ class LogAnalyzer:
                             rtt_data.append(rtt_values)
                             labels.append(int(re.sub(r'[a-zA-Z]', '', size)))
 
-                        labels.sort()
-                        for i in range(len(labels)):
-                            labels[i] = f"{labels[i]}"
+                        labels, rtt_data = zip(*sorted(zip(labels, rtt_data)))
+                        labels = [str(label) for label in labels]
+
                         boxplot = plt.boxplot(rtt_data, labels=labels, patch_artist=False, showmeans=True)
                         plt.title(
-                            f"RTT Distributions for \n {self.format_config_name_for_boxplot_title(config_name)}\n(Attenuation: {self.extract_digits(attenuation)}dB)", fontsize=24)
+                            f"RTT Distributions for \n {self.format_config_name_for_boxplot_title(config_name)}\n(Attenuation: {self.extract_digits(attenuation)}dB)",
+                            fontsize=24)
                         plt.xlabel("Packet Size [bytes]", fontsize=20)
                         plt.ylabel("RTT [ms]", fontsize=20)
                         plt.xticks(rotation=45, ha='right', fontsize=20)
                         plt.yticks(fontsize=20)
-                        plt.xlim(0.85, 1.15)  # zoom into the only boxplot
-                        for i, rtt_values in enumerate(rtt_data):
-                            median = boxplot['medians'][i].get_ydata()[0]
-                            path = boxplot['boxes'][i].get_path()
-                            vertices = path.vertices
-                            q1 = vertices[0][1]  # Bottom of the box
-                            q3 = vertices[2][1]  # Top of the box
-                            mean = boxplot['means'][i].get_ydata()[0] if 'means' in boxplot else None
+                        plt.xlim(0.85, 1.15)
 
-                            x = i + 1
+                        for i, rtt_values in enumerate(rtt_data):
+                            rtt_array = np.array(rtt_values)
+                            mean = np.mean(rtt_array)
+                            median = np.median(rtt_array)
+                            std = np.std(rtt_array)
+                            min_val = np.min(rtt_array)
+                            max_val = np.max(rtt_array)
+                            q1 = np.percentile(rtt_array, 25)
+                            q3 = np.percentile(rtt_array, 75)
 
                             writer.writerow([
                                 config_name,
                                 self.extract_digits(attenuation),
-                                self.extract_digits(size),
+                                labels[i],
                                 round(mean, 3),
                                 round(median, 3),
+                                round(std, 3),
+                                round(min_val, 3),
+                                round(max_val, 3),
                                 round(q1, 3),
                                 round(q3, 3)
                             ])
