@@ -1,6 +1,6 @@
 RESULTS = 'results'
 MODE = "throughput_only"
-TEST_NAME = "20250404-184552_thrpt_only_first_half"
+TEST_NAME = "20250404-184552_thrpt_only_second_half"
 PING_PACKET_SIZES = ["56B"]
 TYPES_OF_LOGS = ["pcap"]
 
