@@ -235,7 +235,7 @@ class LogAnalyzer:
         def traverse(path, structure, level=0):
             if level == len(structure):
                 for file in path.iterdir():
-                    if file.is_file() and file.suffix == ".pcap" and "pcap" in file.name:
+                    if file.is_file() and file.suffix == ".gz" and "pcap" in file.name:
                         files_to_process.append(file)
                 return
 
