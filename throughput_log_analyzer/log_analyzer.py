@@ -2,6 +2,8 @@ import os
 import csv
 import pandas as pd
 import numpy as np
+import gzip
+import io
 
 from scapy.all import PcapReader
 from tqdm import tqdm
@@ -38,11 +40,56 @@ class LogAnalyzer:
         return path_str[start_index:]
 
 
-    def compute_avg_throughput(self, pcap_file, src_ip="10.15.20.10", dst_ip="10.15.20.239", start_sec=5, end_sec=25) -> float:
+    # PCAPS
+    # def compute_avg_throughput(self, pcap_file, src_ip="10.15.20.10", dst_ip="10.15.20.239", start_sec=5, end_sec=25) -> float:
+    #     timestamps = []
+    #     sizes = []
+    #
+    #     with PcapReader(str(pcap_file)) as pcap:
+    #         for pkt in pcap:
+    #             if pkt.haslayer("IP"):
+    #                 ip_layer = pkt["IP"]
+    #                 if ip_layer.src == src_ip and ip_layer.dst == dst_ip:
+    #                     timestamps.append(pkt.time)
+    #                     sizes.append(len(pkt))
+    #
+    #     if not timestamps:
+    #         print(f"No matching packets found in {pcap_file}.")
+    #         return 0.0
+    #
+    #     # Normalize timestamps
+    #     df = pd.DataFrame({"time": timestamps, "size": sizes})
+    #     df["time"] = df["time"] - df["time"].min()
+    #
+    #     # Select interval
+    #     mask = (df["time"] >= start_sec) & (df["time"] < end_sec)
+    #     interval_df = df.loc[mask]
+    #
+    #     if interval_df.empty:
+    #         print(f"No packets found in interval {start_sec}–{end_sec}s for {pcap_file}.")
+    #         return 0.0
+    #
+    #     total_bits = interval_df["size"].sum() * 8
+    #     duration = end_sec - start_sec  # seconds
+    #
+    #     throughput_mibps = total_bits / duration / (1024 * 1024)  # Convert to Mibps
+    #     return throughput_mibps
+
+    # PCAPS.GZ
+    def compute_avg_throughput(self, pcap_file, src_ip="10.15.20.10", dst_ip="10.15.20.239", start_sec=5,
+                               end_sec=25) -> float:
         timestamps = []
         sizes = []
 
-        with PcapReader(str(pcap_file)) as pcap:
+        # Check if the file is gzipped
+        if str(pcap_file).endswith(".gz"):
+            with gzip.open(pcap_file, 'rb') as f:
+                pcap_stream = io.BytesIO(f.read())
+            pcap = PcapReader(pcap_stream)
+        else:
+            pcap = PcapReader(str(pcap_file))
+
+        with pcap:
             for pkt in pcap:
                 if pkt.haslayer("IP"):
                     ip_layer = pkt["IP"]
@@ -71,7 +118,6 @@ class LogAnalyzer:
 
         throughput_mibps = total_bits / duration / (1024 * 1024)  # Convert to Mibps
         return throughput_mibps
-
 
     def prepare_dict_for_test_data(self, file, mean):
         parametrizable_test_metrics = {}
