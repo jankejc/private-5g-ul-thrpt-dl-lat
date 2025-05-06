@@ -1,0 +1,36 @@
+PING 192.168.123.2 (192.168.123.2) 512(540) bytes of data.
+520 bytes from 192.168.123.2: icmp_seq=12 ttl=64 time=9935 ms
+520 bytes from 192.168.123.2: icmp_seq=13 ttl=64 time=9732 ms
+520 bytes from 192.168.123.2: icmp_seq=14 ttl=64 time=9529 ms
+520 bytes from 192.168.123.2: icmp_seq=15 ttl=64 time=9328 ms
+520 bytes from 192.168.123.2: icmp_seq=16 ttl=64 time=9125 ms
+520 bytes from 192.168.123.2: icmp_seq=17 ttl=64 time=8923 ms
+520 bytes from 192.168.123.2: icmp_seq=18 ttl=64 time=8723 ms
+520 bytes from 192.168.123.2: icmp_seq=19 ttl=64 time=8523 ms
+520 bytes from 192.168.123.2: icmp_seq=20 ttl=64 time=8321 ms
+520 bytes from 192.168.123.2: icmp_seq=21 ttl=64 time=8118 ms
+520 bytes from 192.168.123.2: icmp_seq=22 ttl=64 time=7917 ms
+520 bytes from 192.168.123.2: icmp_seq=23 ttl=64 time=7714 ms
+520 bytes from 192.168.123.2: icmp_seq=24 ttl=64 time=7513 ms
+520 bytes from 192.168.123.2: icmp_seq=25 ttl=64 time=7310 ms
+From 192.168.123.1 icmp_seq=67 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=68 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=69 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=70 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=71 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=72 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=73 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=74 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=75 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=76 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=77 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=78 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=79 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=80 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=81 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=82 Destination Host Unreachable
+520 bytes from 192.168.123.2: icmp_seq=62 ttl=64 time=7362 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 15 received, +16 errors, 85% packet loss, time 23396ms
+rtt min/avg/max/mdev = 7310.090/8538.352/9935.225/846.204 ms, pipe 49

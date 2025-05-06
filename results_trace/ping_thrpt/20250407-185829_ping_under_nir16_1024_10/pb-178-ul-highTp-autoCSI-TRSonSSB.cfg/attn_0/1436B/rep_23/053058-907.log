@@ -1,0 +1,128 @@
+{
+  message: ready,
+  type: ENB,
+  name: ENB,
+  version: 2023-06-10,
+  time: 2678.366,
+  utc: 1744083058.909
+}
+{
+  message: ue_get,
+  ue_list: [
+    {
+      ran_ue_id: 49,
+      amf_ue_id: 148,
+      qos_flow_list: [],
+      rnti: 17969,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 2487,
+          ul_bitrate: 0,
+          dl_tx: 3,
+          ul_tx: 0,
+          dl_err: 22,
+          ul_err: 0,
+          dl_retx: 114,
+          ul_retx: 0,
+          pusch_snr: 9.4,
+          epre: -110.9,
+          ul_phr: -13,
+          ul_path_loss: 116.3,
+          p_ue: 24,
+          dl_mcs: 11.7,
+          cqi: 9,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    },
+    {
+      ran_ue_id: 48,
+      amf_ue_id: 147,
+      qos_flow_list: [
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 0,
+          ul_total_bytes: 244,
+          sst: 1
+        }
+      ],
+      rnti: 17968,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 1558,
+          ul_bitrate: 0,
+          dl_tx: 2,
+          ul_tx: 0,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 2,
+          ul_retx: 0,
+          pusch_snr: 24.4,
+          epre: -96.3,
+          ul_phr: 6,
+          ul_path_loss: 81.8,
+          p_ue: 2,
+          dl_mcs: 13,
+          cqi: 10,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    },
+    {
+      ran_ue_id: 4,
+      amf_ue_id: 103,
+      qos_flow_list: [
+        {
+          pdu_session_id: 1,
+          dl_total_bytes: 15225,
+          ul_total_bytes: 8943,
+          sst: 1
+        },
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 9461618,
+          ul_total_bytes: 34155982258,
+          sst: 1
+        }
+      ],
+      rnti: 17924,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 112798,
+          ul_bitrate: 103123761,
+          dl_tx: 64,
+          ul_tx: 811,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 0,
+          ul_retx: 0,
+          pusch_snr: 25.5,
+          epre: -94.5,
+          ul_phr: 11,
+          ul_path_loss: 68.7,
+          p_ue: 8,
+          dl_mcs: 25.6,
+          ul_mcs: 21,
+          ul_n_layer: 1,
+          turbo_decoder_min: 1,
+          turbo_decoder_avg: 2.155,
+          turbo_decoder_max: 4,
+          cqi: 15,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    }
+  ],
+  time: 2678.368,
+  utc: 1744083058.92
+}
+

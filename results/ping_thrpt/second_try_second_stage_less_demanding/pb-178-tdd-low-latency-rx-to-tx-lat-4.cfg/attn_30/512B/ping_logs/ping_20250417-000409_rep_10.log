@@ -1,0 +1,25 @@
+PING 192.168.123.2 (192.168.123.2) 512(540) bytes of data.
+520 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=5042 ms
+520 bytes from 192.168.123.2: icmp_seq=66 ttl=64 time=4322 ms
+520 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=4111 ms
+From 192.168.123.1 icmp_seq=83 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=84 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=85 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=86 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=87 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=88 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=89 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=90 Destination Host Unreachable
+520 bytes from 192.168.123.2: icmp_seq=80 ttl=64 time=5535 ms
+From 192.168.123.1 icmp_seq=91 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=92 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=93 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=94 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=95 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=96 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=97 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=98 Destination Host Unreachable
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 4 received, +16 errors, 96% packet loss, time 23399ms
+rtt min/avg/max/mdev = 4110.702/4752.678/5535.438/568.724 ms, pipe 25

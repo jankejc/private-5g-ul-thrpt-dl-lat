@@ -1,0 +1,35 @@
+PING 192.168.123.2 (192.168.123.2) 1436(1464) bytes of data.
+1444 bytes from 192.168.123.2: icmp_seq=2 ttl=64 time=475 ms
+1444 bytes from 192.168.123.2: icmp_seq=3 ttl=64 time=476 ms
+1444 bytes from 192.168.123.2: icmp_seq=5 ttl=64 time=484 ms
+1444 bytes from 192.168.123.2: icmp_seq=6 ttl=64 time=462 ms
+1444 bytes from 192.168.123.2: icmp_seq=7 ttl=64 time=426 ms
+From 192.168.123.1 icmp_seq=18 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=19 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=20 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=21 Destination Host Unreachable
+1444 bytes from 192.168.123.2: icmp_seq=26 ttl=64 time=474 ms
+1444 bytes from 192.168.123.2: icmp_seq=27 ttl=64 time=476 ms
+1444 bytes from 192.168.123.2: icmp_seq=28 ttl=64 time=461 ms
+1444 bytes from 192.168.123.2: icmp_seq=29 ttl=64 time=462 ms
+1444 bytes from 192.168.123.2: icmp_seq=30 ttl=64 time=470 ms
+1444 bytes from 192.168.123.2: icmp_seq=31 ttl=64 time=472 ms
+1444 bytes from 192.168.123.2: icmp_seq=32 ttl=64 time=474 ms
+1444 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=478 ms
+1444 bytes from 192.168.123.2: icmp_seq=34 ttl=64 time=480 ms
+1444 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=454 ms
+1444 bytes from 192.168.123.2: icmp_seq=36 ttl=64 time=458 ms
+1444 bytes from 192.168.123.2: icmp_seq=37 ttl=64 time=427 ms
+1444 bytes from 192.168.123.2: icmp_seq=73 ttl=64 time=691 ms
+1444 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=681 ms
+1444 bytes from 192.168.123.2: icmp_seq=83 ttl=64 time=662 ms
+1444 bytes from 192.168.123.2: icmp_seq=84 ttl=64 time=656 ms
+1444 bytes from 192.168.123.2: icmp_seq=85 ttl=64 time=687 ms
+1444 bytes from 192.168.123.2: icmp_seq=86 ttl=64 time=677 ms
+1444 bytes from 192.168.123.2: icmp_seq=87 ttl=64 time=726 ms
+1444 bytes from 192.168.123.2: icmp_seq=97 ttl=64 time=650 ms
+1444 bytes from 192.168.123.2: icmp_seq=98 ttl=64 time=684 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 26 received, +4 errors, 74% packet loss, time 24115ms
+rtt min/avg/max/mdev = 426.166/539.300/725.980/103.510 ms, pipe 4

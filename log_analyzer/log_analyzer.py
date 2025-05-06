@@ -160,7 +160,7 @@ class LogAnalyzer:
                         plt.ylabel("RTT [ms]", fontsize=20)
                         plt.xticks(rotation=45, ha='right', fontsize=20)
                         plt.yticks(fontsize=20)
-                        plt.xlim(0.85, 1.15)
+                        # plt.xlim(0.75, 1.25)
 
                         for i, rtt_values in enumerate(rtt_data):
                             rtt_array = np.array(rtt_values)

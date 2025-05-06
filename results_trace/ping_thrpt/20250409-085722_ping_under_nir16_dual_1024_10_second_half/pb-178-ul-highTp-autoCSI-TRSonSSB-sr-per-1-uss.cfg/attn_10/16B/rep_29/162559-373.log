@@ -1,0 +1,110 @@
+{
+  message: ready,
+  type: ENB,
+  name: ENB,
+  version: 2023-06-10,
+  time: 961.905,
+  utc: 1744208759.375
+}
+{
+  message: ue_get,
+  ue_list: [
+    {
+      ran_ue_id: 28,
+      amf_ue_id: 119,
+      qos_flow_list: [
+        {
+          pdu_session_id: 1,
+          dl_total_bytes: 0,
+          ul_total_bytes: 0,
+          sst: 1
+        },
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 1226851,
+          ul_total_bytes: 367006,
+          sst: 1
+        }
+      ],
+      rnti: 17948,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 768975,
+          ul_bitrate: 622816,
+          dl_tx: 55,
+          ul_tx: 74,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 6,
+          ul_retx: 1,
+          pusch_snr: 28.6,
+          epre: -87.7,
+          ul_phr: -3,
+          ul_path_loss: 99.7,
+          p_ue: 19,
+          dl_mcs: 16.1,
+          ul_mcs: 13.5,
+          ul_n_layer: 1,
+          turbo_decoder_min: 0,
+          turbo_decoder_avg: 1.74,
+          turbo_decoder_max: 5,
+          cqi: 11,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    },
+    {
+      ran_ue_id: 3,
+      amf_ue_id: 102,
+      qos_flow_list: [
+        {
+          pdu_session_id: 1,
+          dl_total_bytes: 26534,
+          ul_total_bytes: 10333,
+          sst: 1
+        },
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 1697756,
+          ul_total_bytes: 18888980853,
+          sst: 1
+        }
+      ],
+      rnti: 17923,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 125310,
+          ul_bitrate: 180077064,
+          dl_tx: 82,
+          ul_tx: 1221,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 2,
+          ul_retx: 7,
+          pusch_snr: 25.8,
+          epre: -94.2,
+          ul_phr: -3,
+          ul_path_loss: 77.4,
+          p_ue: 19,
+          dl_mcs: 23.3,
+          ul_mcs: 24.1,
+          ul_n_layer: 1,
+          turbo_decoder_min: 0,
+          turbo_decoder_avg: 2.555,
+          turbo_decoder_max: 5,
+          cqi: 15,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    }
+  ],
+  time: 961.907,
+  utc: 1744208759.386
+}
+

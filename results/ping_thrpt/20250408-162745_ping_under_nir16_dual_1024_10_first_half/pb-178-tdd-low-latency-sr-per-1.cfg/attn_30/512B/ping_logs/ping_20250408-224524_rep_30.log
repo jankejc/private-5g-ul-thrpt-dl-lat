@@ -1,0 +1,35 @@
+PING 192.168.123.2 (192.168.123.2) 512(540) bytes of data.
+520 bytes from 192.168.123.2: icmp_seq=2 ttl=64 time=500 ms
+520 bytes from 192.168.123.2: icmp_seq=7 ttl=64 time=488 ms
+520 bytes from 192.168.123.2: icmp_seq=12 ttl=64 time=475 ms
+520 bytes from 192.168.123.2: icmp_seq=13 ttl=64 time=466 ms
+520 bytes from 192.168.123.2: icmp_seq=20 ttl=64 time=479 ms
+520 bytes from 192.168.123.2: icmp_seq=21 ttl=64 time=477 ms
+520 bytes from 192.168.123.2: icmp_seq=22 ttl=64 time=476 ms
+520 bytes from 192.168.123.2: icmp_seq=23 ttl=64 time=440 ms
+520 bytes from 192.168.123.2: icmp_seq=29 ttl=64 time=479 ms
+520 bytes from 192.168.123.2: icmp_seq=30 ttl=64 time=468 ms
+520 bytes from 192.168.123.2: icmp_seq=31 ttl=64 time=453 ms
+520 bytes from 192.168.123.2: icmp_seq=36 ttl=64 time=446 ms
+520 bytes from 192.168.123.2: icmp_seq=41 ttl=64 time=256 ms
+520 bytes from 192.168.123.2: icmp_seq=40 ttl=64 time=500 ms
+520 bytes from 192.168.123.2: icmp_seq=46 ttl=64 time=505 ms
+520 bytes from 192.168.123.2: icmp_seq=47 ttl=64 time=457 ms
+520 bytes from 192.168.123.2: icmp_seq=48 ttl=64 time=471 ms
+520 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=491 ms
+520 bytes from 192.168.123.2: icmp_seq=55 ttl=64 time=246 ms
+520 bytes from 192.168.123.2: icmp_seq=54 ttl=64 time=458 ms
+520 bytes from 192.168.123.2: icmp_seq=63 ttl=64 time=480 ms
+520 bytes from 192.168.123.2: icmp_seq=64 ttl=64 time=480 ms
+520 bytes from 192.168.123.2: icmp_seq=65 ttl=64 time=470 ms
+520 bytes from 192.168.123.2: icmp_seq=66 ttl=64 time=469 ms
+520 bytes from 192.168.123.2: icmp_seq=75 ttl=64 time=217 ms
+520 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=501 ms
+520 bytes from 192.168.123.2: icmp_seq=81 ttl=64 time=460 ms
+520 bytes from 192.168.123.2: icmp_seq=86 ttl=64 time=493 ms
+520 bytes from 192.168.123.2: icmp_seq=87 ttl=64 time=477 ms
+520 bytes from 192.168.123.2: icmp_seq=93 ttl=64 time=469 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 30 received, 70% packet loss, time 20091ms
+rtt min/avg/max/mdev = 217.084/451.573/504.904/72.559 ms, pipe 3

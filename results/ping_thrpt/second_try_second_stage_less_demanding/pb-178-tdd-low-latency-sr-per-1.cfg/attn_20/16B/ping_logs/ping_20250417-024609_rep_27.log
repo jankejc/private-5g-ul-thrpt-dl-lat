@@ -1,0 +1,36 @@
+PING 192.168.123.2 (192.168.123.2) 16(44) bytes of data.
+24 bytes from 192.168.123.2: icmp_seq=1 ttl=64 time=811 ms
+24 bytes from 192.168.123.2: icmp_seq=3 ttl=64 time=829 ms
+24 bytes from 192.168.123.2: icmp_seq=5 ttl=64 time=883 ms
+24 bytes from 192.168.123.2: icmp_seq=7 ttl=64 time=912 ms
+24 bytes from 192.168.123.2: icmp_seq=9 ttl=64 time=887 ms
+24 bytes from 192.168.123.2: icmp_seq=25 ttl=64 time=916 ms
+24 bytes from 192.168.123.2: icmp_seq=27 ttl=64 time=840 ms
+24 bytes from 192.168.123.2: icmp_seq=29 ttl=64 time=818 ms
+24 bytes from 192.168.123.2: icmp_seq=31 ttl=64 time=857 ms
+24 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=784 ms
+24 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=802 ms
+24 bytes from 192.168.123.2: icmp_seq=37 ttl=64 time=811 ms
+24 bytes from 192.168.123.2: icmp_seq=39 ttl=64 time=904 ms
+24 bytes from 192.168.123.2: icmp_seq=41 ttl=64 time=852 ms
+24 bytes from 192.168.123.2: icmp_seq=42 ttl=64 time=851 ms
+24 bytes from 192.168.123.2: icmp_seq=44 ttl=64 time=901 ms
+24 bytes from 192.168.123.2: icmp_seq=60 ttl=64 time=920 ms
+24 bytes from 192.168.123.2: icmp_seq=62 ttl=64 time=873 ms
+24 bytes from 192.168.123.2: icmp_seq=64 ttl=64 time=827 ms
+24 bytes from 192.168.123.2: icmp_seq=66 ttl=64 time=788 ms
+24 bytes from 192.168.123.2: icmp_seq=68 ttl=64 time=810 ms
+24 bytes from 192.168.123.2: icmp_seq=70 ttl=64 time=822 ms
+24 bytes from 192.168.123.2: icmp_seq=72 ttl=64 time=816 ms
+24 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=857 ms
+24 bytes from 192.168.123.2: icmp_seq=77 ttl=64 time=838 ms
+24 bytes from 192.168.123.2: icmp_seq=79 ttl=64 time=886 ms
+24 bytes from 192.168.123.2: icmp_seq=91 ttl=64 time=935 ms
+24 bytes from 192.168.123.2: icmp_seq=93 ttl=64 time=920 ms
+24 bytes from 192.168.123.2: icmp_seq=95 ttl=64 time=871 ms
+24 bytes from 192.168.123.2: icmp_seq=97 ttl=64 time=878 ms
+24 bytes from 192.168.123.2: icmp_seq=99 ttl=64 time=827 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 31 received, 69% packet loss, time 20079ms
+rtt min/avg/max/mdev = 783.643/855.395/934.735/42.196 ms, pipe 5

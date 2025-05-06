@@ -1,0 +1,104 @@
+{
+  message: ready,
+  type: ENB,
+  name: ENB,
+  version: 2023-06-10,
+  time: 1997.856,
+  utc: 1744064476.161
+}
+{
+  message: ue_get,
+  ue_list: [
+    {
+      ran_ue_id: 28,
+      amf_ue_id: 127,
+      qos_flow_list: [
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 13005,
+          ul_total_bytes: 9475,
+          sst: 1
+        }
+      ],
+      rnti: 17948,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 59,
+          ul_bitrate: 49,
+          dl_tx: 32,
+          ul_tx: 199,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 7,
+          ul_retx: 2,
+          pusch_snr: 6.2,
+          epre: -114.8,
+          ul_phr: -20,
+          ul_path_loss: 101.8,
+          p_ue: 8,
+          dl_mcs: 18.2,
+          ul_mcs: 4.3,
+          ul_n_layer: 1,
+          turbo_decoder_min: 1,
+          turbo_decoder_avg: 1.209,
+          turbo_decoder_max: 5,
+          cqi: 12,
+          ri: 1,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    },
+    {
+      ran_ue_id: 5,
+      amf_ue_id: 104,
+      qos_flow_list: [
+        {
+          pdu_session_id: 1,
+          dl_total_bytes: 9833,
+          ul_total_bytes: 7841,
+          sst: 1
+        },
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 4857989,
+          ul_total_bytes: 21670648631,
+          sst: 1
+        }
+      ],
+      rnti: 17925,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 90949,
+          ul_bitrate: 79593951,
+          dl_tx: 110,
+          ul_tx: 1074,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 7,
+          ul_retx: 0,
+          pusch_snr: 18.9,
+          epre: -101.7,
+          ul_phr: -12,
+          ul_path_loss: 87.9,
+          p_ue: 22,
+          dl_mcs: 18,
+          ul_mcs: 15,
+          ul_n_layer: 1,
+          turbo_decoder_min: 1,
+          turbo_decoder_avg: 2.026,
+          turbo_decoder_max: 3,
+          cqi: 12,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    }
+  ],
+  time: 1997.858,
+  utc: 1744064476.172
+}
+

@@ -1,0 +1,36 @@
+PING 192.168.123.2 (192.168.123.2) 1436(1464) bytes of data.
+1444 bytes from 192.168.123.2: icmp_seq=3 ttl=64 time=919 ms
+1444 bytes from 192.168.123.2: icmp_seq=5 ttl=64 time=866 ms
+1444 bytes from 192.168.123.2: icmp_seq=7 ttl=64 time=869 ms
+1444 bytes from 192.168.123.2: icmp_seq=9 ttl=64 time=937 ms
+1444 bytes from 192.168.123.2: icmp_seq=11 ttl=64 time=943 ms
+1444 bytes from 192.168.123.2: icmp_seq=27 ttl=64 time=935 ms
+1444 bytes from 192.168.123.2: icmp_seq=29 ttl=64 time=943 ms
+1444 bytes from 192.168.123.2: icmp_seq=31 ttl=64 time=946 ms
+1444 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=810 ms
+1444 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=807 ms
+1444 bytes from 192.168.123.2: icmp_seq=37 ttl=64 time=808 ms
+1444 bytes from 192.168.123.2: icmp_seq=39 ttl=64 time=806 ms
+1444 bytes from 192.168.123.2: icmp_seq=41 ttl=64 time=888 ms
+1444 bytes from 192.168.123.2: icmp_seq=43 ttl=64 time=945 ms
+1444 bytes from 192.168.123.2: icmp_seq=51 ttl=64 time=966 ms
+1444 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=959 ms
+1444 bytes from 192.168.123.2: icmp_seq=55 ttl=64 time=952 ms
+1444 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=949 ms
+1444 bytes from 192.168.123.2: icmp_seq=59 ttl=64 time=1002 ms
+1444 bytes from 192.168.123.2: icmp_seq=61 ttl=64 time=932 ms
+1444 bytes from 192.168.123.2: icmp_seq=69 ttl=64 time=915 ms
+1444 bytes from 192.168.123.2: icmp_seq=71 ttl=64 time=918 ms
+1444 bytes from 192.168.123.2: icmp_seq=73 ttl=64 time=920 ms
+1444 bytes from 192.168.123.2: icmp_seq=75 ttl=64 time=927 ms
+1444 bytes from 192.168.123.2: icmp_seq=77 ttl=64 time=934 ms
+1444 bytes from 192.168.123.2: icmp_seq=79 ttl=64 time=936 ms
+1444 bytes from 192.168.123.2: icmp_seq=81 ttl=64 time=944 ms
+1444 bytes from 192.168.123.2: icmp_seq=83 ttl=64 time=950 ms
+1444 bytes from 192.168.123.2: icmp_seq=91 ttl=64 time=982 ms
+1444 bytes from 192.168.123.2: icmp_seq=93 ttl=64 time=847 ms
+1444 bytes from 192.168.123.2: icmp_seq=95 ttl=64 time=521 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 31 received, 69% packet loss, time 20078ms
+rtt min/avg/max/mdev = 520.883/902.356/1001.974/86.698 ms, pipe 5

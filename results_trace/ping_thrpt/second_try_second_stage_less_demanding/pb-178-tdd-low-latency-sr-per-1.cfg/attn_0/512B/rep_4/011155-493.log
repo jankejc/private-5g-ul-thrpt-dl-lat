@@ -1,0 +1,63 @@
+{
+  message: ready,
+  type: ENB,
+  name: ENB,
+  version: 2023-06-10,
+  time: 1103.527,
+  utc: 1744845115.495
+}
+{
+  message: ue_get,
+  ue_list: [
+    {
+      ran_ue_id: 3,
+      amf_ue_id: 102,
+      qos_flow_list: [
+        {
+          pdu_session_id: 1,
+          dl_total_bytes: 7594,
+          ul_total_bytes: 7432,
+          sst: 1
+        },
+        {
+          pdu_session_id: 2,
+          dl_total_bytes: 824731,
+          ul_total_bytes: 11916010442,
+          sst: 1
+        }
+      ],
+      rnti: 17923,
+      cells: [
+        {
+          cell_id: 1,
+          dl_bitrate: 177022,
+          ul_bitrate: 93615869,
+          dl_tx: 97,
+          ul_tx: 926,
+          dl_err: 0,
+          ul_err: 0,
+          dl_retx: 0,
+          ul_retx: 5,
+          pusch_snr: 26.3,
+          epre: -93.1,
+          ul_phr: -6,
+          ul_path_loss: 77,
+          p_ue: 22,
+          dl_mcs: 28,
+          ul_mcs: 20.4,
+          ul_n_layer: 1,
+          turbo_decoder_min: 1,
+          turbo_decoder_avg: 2.229,
+          turbo_decoder_max: 5,
+          cqi: 15,
+          ri: 2,
+          ul_rank: 1,
+          initial_ta: 1
+        }
+      ]
+    }
+  ],
+  time: 1103.529,
+  utc: 1744845115.505
+}
+

@@ -1,0 +1,35 @@
+PING 192.168.123.2 (192.168.123.2) 512(540) bytes of data.
+From 192.168.123.1 icmp_seq=1 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=2 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=3 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=9 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=10 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=11 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=12 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=13 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=14 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=15 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=17 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=18 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=19 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=20 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=21 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=22 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=23 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=24 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=25 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=26 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=27 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=28 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=29 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=30 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=31 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=32 Destination Host Unreachable
+520 bytes from 192.168.123.2: icmp_seq=37 ttl=64 time=5160 ms
+520 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=7143 ms
+520 bytes from 192.168.123.2: icmp_seq=56 ttl=64 time=6907 ms
+520 bytes from 192.168.123.2: icmp_seq=63 ttl=64 time=8676 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 4 received, +26 errors, 96% packet loss, time 24383ms
+rtt min/avg/max/mdev = 5159.567/6971.337/8675.686/1247.105 ms, pipe 38

@@ -1,0 +1,6 @@
+configuration,avg_throughput,std_throughput,avg_rtt,std_rtt
+LL: Rx to Tx = 4,130.79346666666666,0.0,11.0,0.553
+LL: SR Period = 1,132.7227,0.0,11.322,0.291
+AutoCsiTRSonSSB: PRACH = 128,227.9356,0.0,31.099,1.806
+"AutoCsiTRSonSSB: SR Period = 1, USS",218.7929333333333,0.0,24.798,0.236
+AutoCsiTRSonSSB,231.4114,0.0,31.411,1.818

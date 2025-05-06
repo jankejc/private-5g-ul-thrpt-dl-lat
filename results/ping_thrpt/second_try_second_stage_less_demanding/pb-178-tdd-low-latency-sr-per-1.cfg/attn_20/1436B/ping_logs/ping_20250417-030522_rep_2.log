@@ -1,0 +1,35 @@
+PING 192.168.123.2 (192.168.123.2) 1436(1464) bytes of data.
+1444 bytes from 192.168.123.2: icmp_seq=7 ttl=64 time=936 ms
+1444 bytes from 192.168.123.2: icmp_seq=9 ttl=64 time=806 ms
+1444 bytes from 192.168.123.2: icmp_seq=11 ttl=64 time=881 ms
+1444 bytes from 192.168.123.2: icmp_seq=13 ttl=64 time=941 ms
+1444 bytes from 192.168.123.2: icmp_seq=25 ttl=64 time=934 ms
+1444 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=934 ms
+1444 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=936 ms
+1444 bytes from 192.168.123.2: icmp_seq=37 ttl=64 time=805 ms
+1444 bytes from 192.168.123.2: icmp_seq=39 ttl=64 time=817 ms
+1444 bytes from 192.168.123.2: icmp_seq=41 ttl=64 time=832 ms
+1444 bytes from 192.168.123.2: icmp_seq=43 ttl=64 time=980 ms
+1444 bytes from 192.168.123.2: icmp_seq=45 ttl=64 time=931 ms
+1444 bytes from 192.168.123.2: icmp_seq=46 ttl=64 time=927 ms
+1444 bytes from 192.168.123.2: icmp_seq=48 ttl=64 time=932 ms
+1444 bytes from 192.168.123.2: icmp_seq=50 ttl=64 time=928 ms
+1444 bytes from 192.168.123.2: icmp_seq=66 ttl=64 time=960 ms
+1444 bytes from 192.168.123.2: icmp_seq=68 ttl=64 time=907 ms
+1444 bytes from 192.168.123.2: icmp_seq=70 ttl=64 time=823 ms
+1444 bytes from 192.168.123.2: icmp_seq=72 ttl=64 time=820 ms
+1444 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=826 ms
+1444 bytes from 192.168.123.2: icmp_seq=76 ttl=64 time=838 ms
+1444 bytes from 192.168.123.2: icmp_seq=78 ttl=64 time=835 ms
+1444 bytes from 192.168.123.2: icmp_seq=80 ttl=64 time=848 ms
+1444 bytes from 192.168.123.2: icmp_seq=83 ttl=64 time=917 ms
+1444 bytes from 192.168.123.2: icmp_seq=85 ttl=64 time=914 ms
+1444 bytes from 192.168.123.2: icmp_seq=92 ttl=64 time=839 ms
+1444 bytes from 192.168.123.2: icmp_seq=94 ttl=64 time=965 ms
+1444 bytes from 192.168.123.2: icmp_seq=96 ttl=64 time=901 ms
+1444 bytes from 192.168.123.2: icmp_seq=98 ttl=64 time=959 ms
+1444 bytes from 192.168.123.2: icmp_seq=100 ttl=64 time=961 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 30 received, 70% packet loss, time 20087ms
+rtt min/avg/max/mdev = 804.986/894.389/979.991/55.703 ms, pipe 5

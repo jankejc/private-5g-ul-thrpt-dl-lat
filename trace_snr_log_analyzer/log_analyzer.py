@@ -175,7 +175,7 @@ class LogAnalyzer:
                         plt.ylabel("SNR [dB]", fontsize=20)
                         plt.xticks(rotation=45, ha='right', fontsize=20)
                         plt.yticks(fontsize=20)
-                        plt.xlim(0.65, 1.35)
+                        # plt.xlim(0.65, 1.35)
 
                         for i, snr_values in enumerate(snr_data):
                             snr_array = np.array(snr_values)

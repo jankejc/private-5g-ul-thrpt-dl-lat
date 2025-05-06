@@ -175,7 +175,7 @@ class LogAnalyzer:
                         plt.ylabel("UL MCS", fontsize=20)
                         plt.xticks(rotation=45, ha='right', fontsize=20)
                         plt.yticks(fontsize=20)
-                        plt.xlim(0.65, 1.35)
+                        # plt.xlim(0.65, 1.35) # packet sizes don't fit
 
                         for i, mcs_values in enumerate(mcs_data):
                             mcs_array = np.array(mcs_values)

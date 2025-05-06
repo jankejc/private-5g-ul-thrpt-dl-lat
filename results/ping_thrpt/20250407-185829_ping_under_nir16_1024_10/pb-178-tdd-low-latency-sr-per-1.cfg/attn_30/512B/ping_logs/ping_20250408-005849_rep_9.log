@@ -1,0 +1,10 @@
+PING 192.168.123.2 (192.168.123.2) 512(540) bytes of data.
+520 bytes from 192.168.123.2: icmp_seq=30 ttl=64 time=920 ms
+520 bytes from 192.168.123.2: icmp_seq=38 ttl=64 time=948 ms
+520 bytes from 192.168.123.2: icmp_seq=40 ttl=64 time=914 ms
+520 bytes from 192.168.123.2: icmp_seq=42 ttl=64 time=903 ms
+520 bytes from 192.168.123.2: icmp_seq=44 ttl=64 time=848 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 5 received, 95% packet loss, time 20171ms
+rtt min/avg/max/mdev = 848.303/906.928/948.353/32.861 ms, pipe 5

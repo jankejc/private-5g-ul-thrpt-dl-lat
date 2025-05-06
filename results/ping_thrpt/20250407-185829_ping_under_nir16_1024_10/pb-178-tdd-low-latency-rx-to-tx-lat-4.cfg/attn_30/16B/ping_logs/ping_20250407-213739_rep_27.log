@@ -1,0 +1,25 @@
+PING 192.168.123.2 (192.168.123.2) 16(44) bytes of data.
+24 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=422 ms
+24 bytes from 192.168.123.2: icmp_seq=34 ttl=64 time=428 ms
+24 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=448 ms
+24 bytes from 192.168.123.2: icmp_seq=36 ttl=64 time=454 ms
+24 bytes from 192.168.123.2: icmp_seq=37 ttl=64 time=446 ms
+24 bytes from 192.168.123.2: icmp_seq=38 ttl=64 time=436 ms
+24 bytes from 192.168.123.2: icmp_seq=39 ttl=64 time=446 ms
+24 bytes from 192.168.123.2: icmp_seq=52 ttl=64 time=429 ms
+24 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=427 ms
+24 bytes from 192.168.123.2: icmp_seq=54 ttl=64 time=422 ms
+24 bytes from 192.168.123.2: icmp_seq=55 ttl=64 time=431 ms
+24 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=236 ms
+24 bytes from 192.168.123.2: icmp_seq=56 ttl=64 time=437 ms
+24 bytes from 192.168.123.2: icmp_seq=59 ttl=64 time=248 ms
+24 bytes from 192.168.123.2: icmp_seq=60 ttl=64 time=427 ms
+24 bytes from 192.168.123.2: icmp_seq=61 ttl=64 time=423 ms
+24 bytes from 192.168.123.2: icmp_seq=62 ttl=64 time=425 ms
+24 bytes from 192.168.123.2: icmp_seq=98 ttl=64 time=453 ms
+24 bytes from 192.168.123.2: icmp_seq=99 ttl=64 time=442 ms
+24 bytes from 192.168.123.2: icmp_seq=100 ttl=64 time=433 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 20 received, 80% packet loss, time 20148ms
+rtt min/avg/max/mdev = 235.511/415.498/453.621/58.863 ms, pipe 3

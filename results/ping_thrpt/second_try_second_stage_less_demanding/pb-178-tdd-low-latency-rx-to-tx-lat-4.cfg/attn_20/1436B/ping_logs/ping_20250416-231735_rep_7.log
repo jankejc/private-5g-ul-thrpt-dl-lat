@@ -1,0 +1,34 @@
+PING 192.168.123.2 (192.168.123.2) 1436(1464) bytes of data.
+1444 bytes from 192.168.123.2: icmp_seq=1 ttl=64 time=997 ms
+1444 bytes from 192.168.123.2: icmp_seq=12 ttl=64 time=842 ms
+1444 bytes from 192.168.123.2: icmp_seq=16 ttl=64 time=925 ms
+1444 bytes from 192.168.123.2: icmp_seq=21 ttl=64 time=939 ms
+1444 bytes from 192.168.123.2: icmp_seq=23 ttl=64 time=809 ms
+1444 bytes from 192.168.123.2: icmp_seq=25 ttl=64 time=807 ms
+1444 bytes from 192.168.123.2: icmp_seq=27 ttl=64 time=883 ms
+1444 bytes from 192.168.123.2: icmp_seq=29 ttl=64 time=945 ms
+1444 bytes from 192.168.123.2: icmp_seq=31 ttl=64 time=950 ms
+1444 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=952 ms
+1444 bytes from 192.168.123.2: icmp_seq=39 ttl=64 time=951 ms
+1444 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=932 ms
+1444 bytes from 192.168.123.2: icmp_seq=55 ttl=64 time=924 ms
+1444 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=789 ms
+1444 bytes from 192.168.123.2: icmp_seq=59 ttl=64 time=791 ms
+1444 bytes from 192.168.123.2: icmp_seq=61 ttl=64 time=867 ms
+1444 bytes from 192.168.123.2: icmp_seq=63 ttl=64 time=870 ms
+1444 bytes from 192.168.123.2: icmp_seq=65 ttl=64 time=930 ms
+1444 bytes from 192.168.123.2: icmp_seq=67 ttl=64 time=942 ms
+1444 bytes from 192.168.123.2: icmp_seq=73 ttl=64 time=971 ms
+1444 bytes from 192.168.123.2: icmp_seq=75 ttl=64 time=979 ms
+1444 bytes from 192.168.123.2: icmp_seq=77 ttl=64 time=926 ms
+1444 bytes from 192.168.123.2: icmp_seq=88 ttl=64 time=952 ms
+1444 bytes from 192.168.123.2: icmp_seq=90 ttl=64 time=893 ms
+1444 bytes from 192.168.123.2: icmp_seq=92 ttl=64 time=814 ms
+1444 bytes from 192.168.123.2: icmp_seq=94 ttl=64 time=893 ms
+1444 bytes from 192.168.123.2: icmp_seq=96 ttl=64 time=833 ms
+1444 bytes from 192.168.123.2: icmp_seq=98 ttl=64 time=566 ms
+1444 bytes from 192.168.123.2: icmp_seq=100 ttl=64 time=845 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 29 received, 71% packet loss, time 20079ms
+rtt min/avg/max/mdev = 566.120/886.843/996.854/84.796 ms, pipe 5

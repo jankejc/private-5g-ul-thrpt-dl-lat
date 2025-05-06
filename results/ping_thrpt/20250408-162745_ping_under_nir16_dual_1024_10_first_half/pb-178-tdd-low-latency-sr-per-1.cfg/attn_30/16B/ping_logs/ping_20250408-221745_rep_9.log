@@ -1,0 +1,37 @@
+PING 192.168.123.2 (192.168.123.2) 16(44) bytes of data.
+24 bytes from 192.168.123.2: icmp_seq=2 ttl=64 time=3107 ms
+24 bytes from 192.168.123.2: icmp_seq=3 ttl=64 time=2904 ms
+24 bytes from 192.168.123.2: icmp_seq=4 ttl=64 time=2701 ms
+24 bytes from 192.168.123.2: icmp_seq=5 ttl=64 time=2497 ms
+24 bytes from 192.168.123.2: icmp_seq=6 ttl=64 time=2293 ms
+24 bytes from 192.168.123.2: icmp_seq=7 ttl=64 time=2090 ms
+24 bytes from 192.168.123.2: icmp_seq=8 ttl=64 time=1886 ms
+24 bytes from 192.168.123.2: icmp_seq=9 ttl=64 time=1682 ms
+24 bytes from 192.168.123.2: icmp_seq=10 ttl=64 time=1478 ms
+24 bytes from 192.168.123.2: icmp_seq=11 ttl=64 time=1274 ms
+24 bytes from 192.168.123.2: icmp_seq=12 ttl=64 time=1070 ms
+24 bytes from 192.168.123.2: icmp_seq=13 ttl=64 time=866 ms
+24 bytes from 192.168.123.2: icmp_seq=14 ttl=64 time=662 ms
+24 bytes from 192.168.123.2: icmp_seq=16 ttl=64 time=542 ms
+24 bytes from 192.168.123.2: icmp_seq=19 ttl=64 time=586 ms
+24 bytes from 192.168.123.2: icmp_seq=22 ttl=64 time=607 ms
+24 bytes from 192.168.123.2: icmp_seq=26 ttl=64 time=622 ms
+24 bytes from 192.168.123.2: icmp_seq=34 ttl=64 time=618 ms
+24 bytes from 192.168.123.2: icmp_seq=44 ttl=64 time=581 ms
+24 bytes from 192.168.123.2: icmp_seq=47 ttl=64 time=557 ms
+24 bytes from 192.168.123.2: icmp_seq=51 ttl=64 time=621 ms
+24 bytes from 192.168.123.2: icmp_seq=54 ttl=64 time=639 ms
+24 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=612 ms
+24 bytes from 192.168.123.2: icmp_seq=60 ttl=64 time=622 ms
+24 bytes from 192.168.123.2: icmp_seq=63 ttl=64 time=554 ms
+24 bytes from 192.168.123.2: icmp_seq=67 ttl=64 time=601 ms
+24 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=588 ms
+24 bytes from 192.168.123.2: icmp_seq=78 ttl=64 time=600 ms
+24 bytes from 192.168.123.2: icmp_seq=81 ttl=64 time=609 ms
+24 bytes from 192.168.123.2: icmp_seq=90 ttl=64 time=574 ms
+24 bytes from 192.168.123.2: icmp_seq=93 ttl=64 time=577 ms
+24 bytes from 192.168.123.2: icmp_seq=100 ttl=64 time=566 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 32 received, 68% packet loss, time 20111ms
+rtt min/avg/max/mdev = 542.412/1118.185/3107.442/799.561 ms, pipe 16

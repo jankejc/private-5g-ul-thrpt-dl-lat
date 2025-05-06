@@ -1,0 +1,12 @@
+PING 192.168.123.2 (192.168.123.2) 1436(1464) bytes of data.
+From 192.168.123.1 icmp_seq=7 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=8 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=9 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=10 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=11 Destination Host Unreachable
+From 192.168.123.1 icmp_seq=12 Destination Host Unreachable
+1444 bytes from 192.168.123.2: icmp_seq=26 ttl=64 time=7354 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 1 received, +6 errors, 99% packet loss, time 26994ms
+rtt min/avg/max/mdev = 7354.163/7354.163/7354.163/0.000 ms, pipe 37

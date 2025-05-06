@@ -1,0 +1,35 @@
+PING 192.168.123.2 (192.168.123.2) 512(540) bytes of data.
+520 bytes from 192.168.123.2: icmp_seq=29 ttl=64 time=845 ms
+520 bytes from 192.168.123.2: icmp_seq=31 ttl=64 time=811 ms
+520 bytes from 192.168.123.2: icmp_seq=33 ttl=64 time=823 ms
+520 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=819 ms
+520 bytes from 192.168.123.2: icmp_seq=38 ttl=64 time=873 ms
+520 bytes from 192.168.123.2: icmp_seq=40 ttl=64 time=839 ms
+520 bytes from 192.168.123.2: icmp_seq=42 ttl=64 time=883 ms
+520 bytes from 192.168.123.2: icmp_seq=43 ttl=64 time=861 ms
+520 bytes from 192.168.123.2: icmp_seq=44 ttl=64 time=1809 ms
+520 bytes from 192.168.123.2: icmp_seq=45 ttl=64 time=1608 ms
+520 bytes from 192.168.123.2: icmp_seq=46 ttl=64 time=1406 ms
+520 bytes from 192.168.123.2: icmp_seq=47 ttl=64 time=1206 ms
+520 bytes from 192.168.123.2: icmp_seq=48 ttl=64 time=1005 ms
+520 bytes from 192.168.123.2: icmp_seq=51 ttl=64 time=849 ms
+520 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=863 ms
+520 bytes from 192.168.123.2: icmp_seq=55 ttl=64 time=844 ms
+520 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=851 ms
+520 bytes from 192.168.123.2: icmp_seq=61 ttl=64 time=843 ms
+520 bytes from 192.168.123.2: icmp_seq=65 ttl=64 time=857 ms
+520 bytes from 192.168.123.2: icmp_seq=67 ttl=64 time=843 ms
+520 bytes from 192.168.123.2: icmp_seq=69 ttl=64 time=816 ms
+520 bytes from 192.168.123.2: icmp_seq=71 ttl=64 time=813 ms
+520 bytes from 192.168.123.2: icmp_seq=73 ttl=64 time=826 ms
+520 bytes from 192.168.123.2: icmp_seq=75 ttl=64 time=834 ms
+520 bytes from 192.168.123.2: icmp_seq=78 ttl=64 time=859 ms
+520 bytes from 192.168.123.2: icmp_seq=80 ttl=64 time=794 ms
+520 bytes from 192.168.123.2: icmp_seq=82 ttl=64 time=840 ms
+520 bytes from 192.168.123.2: icmp_seq=84 ttl=64 time=853 ms
+520 bytes from 192.168.123.2: icmp_seq=86 ttl=64 time=888 ms
+520 bytes from 192.168.123.2: icmp_seq=88 ttl=64 time=921 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 30 received, 70% packet loss, time 20097ms
+rtt min/avg/max/mdev = 793.735/939.327/1808.588/240.379 ms, pipe 9

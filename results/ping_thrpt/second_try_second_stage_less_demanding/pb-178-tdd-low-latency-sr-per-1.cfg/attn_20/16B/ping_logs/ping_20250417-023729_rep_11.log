@@ -1,0 +1,37 @@
+PING 192.168.123.2 (192.168.123.2) 16(44) bytes of data.
+24 bytes from 192.168.123.2: icmp_seq=1 ttl=64 time=840 ms
+24 bytes from 192.168.123.2: icmp_seq=3 ttl=64 time=916 ms
+24 bytes from 192.168.123.2: icmp_seq=9 ttl=64 time=933 ms
+24 bytes from 192.168.123.2: icmp_seq=11 ttl=64 time=894 ms
+24 bytes from 192.168.123.2: icmp_seq=13 ttl=64 time=937 ms
+24 bytes from 192.168.123.2: icmp_seq=15 ttl=64 time=825 ms
+24 bytes from 192.168.123.2: icmp_seq=22 ttl=64 time=905 ms
+24 bytes from 192.168.123.2: icmp_seq=24 ttl=64 time=804 ms
+24 bytes from 192.168.123.2: icmp_seq=26 ttl=64 time=826 ms
+24 bytes from 192.168.123.2: icmp_seq=28 ttl=64 time=834 ms
+24 bytes from 192.168.123.2: icmp_seq=30 ttl=64 time=818 ms
+24 bytes from 192.168.123.2: icmp_seq=32 ttl=64 time=827 ms
+24 bytes from 192.168.123.2: icmp_seq=34 ttl=64 time=852 ms
+24 bytes from 192.168.123.2: icmp_seq=35 ttl=64 time=896 ms
+24 bytes from 192.168.123.2: icmp_seq=36 ttl=64 time=859 ms
+24 bytes from 192.168.123.2: icmp_seq=38 ttl=64 time=846 ms
+24 bytes from 192.168.123.2: icmp_seq=41 ttl=64 time=874 ms
+24 bytes from 192.168.123.2: icmp_seq=43 ttl=64 time=911 ms
+24 bytes from 192.168.123.2: icmp_seq=53 ttl=64 time=921 ms
+24 bytes from 192.168.123.2: icmp_seq=55 ttl=64 time=860 ms
+24 bytes from 192.168.123.2: icmp_seq=57 ttl=64 time=831 ms
+24 bytes from 192.168.123.2: icmp_seq=64 ttl=64 time=888 ms
+24 bytes from 192.168.123.2: icmp_seq=66 ttl=64 time=786 ms
+24 bytes from 192.168.123.2: icmp_seq=68 ttl=64 time=793 ms
+24 bytes from 192.168.123.2: icmp_seq=70 ttl=64 time=827 ms
+24 bytes from 192.168.123.2: icmp_seq=72 ttl=64 time=830 ms
+24 bytes from 192.168.123.2: icmp_seq=74 ttl=64 time=903 ms
+24 bytes from 192.168.123.2: icmp_seq=76 ttl=64 time=851 ms
+24 bytes from 192.168.123.2: icmp_seq=77 ttl=64 time=885 ms
+24 bytes from 192.168.123.2: icmp_seq=96 ttl=64 time=828 ms
+24 bytes from 192.168.123.2: icmp_seq=98 ttl=64 time=822 ms
+24 bytes from 192.168.123.2: icmp_seq=100 ttl=64 time=808 ms
+
+--- 192.168.123.2 ping statistics ---
+100 packets transmitted, 32 received, 68% packet loss, time 20087ms
+rtt min/avg/max/mdev = 785.714/856.958/936.867/41.882 ms, pipe 5

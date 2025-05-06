@@ -1,0 +1,1 @@
+In this directory there are only ping logs. PCAPS are on lenovo and VM.

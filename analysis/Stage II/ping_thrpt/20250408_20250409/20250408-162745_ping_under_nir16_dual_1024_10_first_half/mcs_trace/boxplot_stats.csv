@@ -1,0 +1,2 @@
+configuration,attenuation (dB),packet size (B),mean,median,std,min,max,q1,q3
+pb-178-tdd-low-latency-rx-to-tx-lat-4.cfg,0,16,21.2,21.0,0.508,21.0,23.95,21.0,21.1

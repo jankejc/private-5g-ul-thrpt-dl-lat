@@ -1,0 +1,1 @@
+Cfg results were in specific folders but were merged for analyzer script into one folder.
