@@ -4,7 +4,7 @@ import pandas as pd
 from collections import defaultdict
 
 # ===== PARAMETERS =====
-PCAP_FILE = "./pcaps/rep-req-req-1.pcap"
+PCAP_FILE = "../results/one-way-tests/pcaps-tests/rep-req-req-1.pcap"
 REQ_SRC_IP = "192.168.123.1"
 REPLY_SRC_IP = "192.168.123.2"
 MIRROR_SRC_IP = "192.168.124.2"
