@@ -1,0 +1,2 @@
+total_icmp_packets,total_seqs,total_req1,total_req2,total_replies,total_loss,average_owd_ms,average_rtt_ms,loss_percentage
+226502,115727,83889,81281,61332,86233,10.642377705533615,60.97517561134892,74.51415832087585
